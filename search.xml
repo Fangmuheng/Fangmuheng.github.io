@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Github+Hexo+Next搭建博客以及遇到的各种坑]]></title>
+    <url>%2F2019%2F02%2F01%2Ffirst%2F</url>
+    <content type="text"><![CDATA[是根据hojun 百家号一步一步做的，再查找各种资料，花费了两天终于给整明白了，其中还遇到各种别的问题参考了别的资料，还是记录一下吧~ 【比较懒，所以记录也很松散，如果后续又发现问题再继续补充吧（顶锅盖逃）】 1.下载Node.js和git for windows （查询是否下载成功node.js：win+R→cmd→node -v） 2.创建一个新的Repositories，名字填 ××.github.io【这个名字必须是你github的名字，如果不是将会404打不开网页。】 在存储库里创建一个html文档，仓库地址打开就可以看到该文档了。 3.添加秘钥。打开git下载的目录，然后点击git-bash.exe 输入ssh-keygen -t rsa -C “github的注册邮箱地址” （英文引号） 一路回车，生成秘钥。 回到Github，点击头像+setting→SSH and GPG keys →New SSH key 找到C:\Users\用户名.ssh \id_rsa.pub 把里面的秘钥输入。 4.建立文件夹c:\blog用cmd命令进入文件夹内，安装heox（主页有安装命令，然后初始化） 5.输入 hexo s -p 5555 （端口） 6.把文件夹拽入sublime编译器（或者其他的 打开config文件，需要修改的地方有：名，介绍，关键字，作者，url(“http://用户名.github.io)，保存。 复制仓库地址。 在config的最后找到deploy，输入： 1234deploy: type: git repo: （刚才复制的仓库地址） branch: master 7.安装插件。 npm install hexo-deployer-git –save 8.输入 hexo g命令。 9.修改主题（hexo官网有很多，自行配置 每次修改config以后都要执行： 123hexo cleanhexo generatehexo server 10.添加文章（博客根目录cmd命令中即可 1hexo new &quot;xxx&quot; 阅读全文代码，在此之后的不会显示主页上。 1&lt;!--more--&gt; 11.部署到GitHub上： 1hexo d 附： A：在搭建博客中的各种坑 1.config文件中每个冒号后都需要一个空格。首行缩进也要遵循，不然会报错（摊手 比如说修改title、deploy时需要注意下。 2.fatal: not a git repository (or any of the parent directories): .git 初始化一波本地仓库。 12$ git initInitialized empty Git repository in C:/Users/xxx/.git/ 3.使用next主题（按照这个来：http://theme-next.iissnan.com/getting-started.html 端口被占用的话，用其他端口替代一下。（比如说本地访问http://localhost:4000/不能打开的时候（本人用的端口是5555 1$ hexo s -p 5555 --debug 有关于Next主题的配置相关（标签、分类、字数统计之类），建议阅读以下文章： https://www.jianshu.com/p/21c94eb7bcd1 https://www.jianshu.com/p/9f0e90cc32c2 https://blog.csdn.net/fanxiaobin577328725/article/details/79209975 http://theme-next.iissnan.com/getting-started.html 持续更新…… 4.部署到GitHub上出现如下错误（最后一步了啊喂）： 12error: RPC failed; curl 56 OpenSSL SSL_read: SSL_ERROR_SYSCALL, errno 10054fatal: the remote end hung up unexpectedlyB | 14.00 KiB/s 解决办法：修改Git的传输字节限制，SSL证书略过检查。 12git config --global http.postBuffer 524288000 git config --global http.sslVerify false B：记录几个可能会用到的目录 站点配置文件config.yml（博库根目录下 主题配置文件config.yml（在next主题里 主题中的footer.swig ：网站底部信息 主题中的sidebar.swig：左/右侧个人信息栏 主题中的post.swig：文章底部标签 【其实在搭建过程中遇到的坑还蛮多的，感觉这种事情还得靠玄学，有的人好像就没遇到过（小声bb）感觉所有坑都被我踩了个遍……不过还好，在部署到github上以后，再从自己的网站中打开，感觉人生都光明了~接下来的任务是：创建日历、留言板、评论、书单等内容，希望这个寒假能够整完吧~】]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>个人博客</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2019%2F02%2F01%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
