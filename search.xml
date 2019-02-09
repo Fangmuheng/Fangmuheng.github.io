@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[js学习笔记-对象]]></title>
+    <url>%2F2019%2F02%2F09%2Fjs%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%AF%B9%E8%B1%A1%2F</url>
+    <content type="text"><![CDATA[JavaScript中的对象（包括如何访问、设置）、面向对象编程(OOP) 理论 。 对象 对象是一个包含相关数据和方法的集合（通常由一些变量和函数组成，称之为对象里面的属性和方法） JavaScript 中的所有事物都是对象：字符串、数值、数组、函数。并且允许自定义对象。 对象只是带有属性和方法的特殊数据类型。 123456789101112//person即为一个对象，里面包含了对象的属性和对象的方法。var person = &#123; name : ['Bob','Smith'], age : 32, interests : ['music','skiing'], bio : function()&#123; alert(this.name[0]+ ' '+this.name[1]+' is '+this.age+' years old . He likes '+this.interests[0]+ ' and '+ this.interests[1]+ ' . ' ); &#125;, greeting : function()&#123; alert('Hi!I\'m '+this.name[0]+ ' . '); &#125; &#125;; 名字（name）和值（value）需要用：隔开。 每个属性/方法之间用，隔开（最后一个成员结尾不要有逗号）。 上述创建对象是称为对象的字面量(literal)——手动的写出对象的内容来创建一个对象，与实例化对象不同。 访问对象属性的方法 点表示法 123456//对象.属性person.name[0]person.ageperson.interests[1]//对象.方法person.bio() Note：子命名法-链式。 1234567891011121314//上述式子：name : ['Bob','Smith'],//可以分开写成如下形式：name : &#123; first : 'Bob', last : 'Smith'&#125;,//链式点表示法：person.name.firstperson.name.last//同时以下也要改变：name[0]//要改成：name.first 括号表示法 12person['age']person['name']['first'] Note: 1.点表示法：属性名称必须为一个标示符(静态字符串)，不能为变量。 2.括号表示法一个有用的地方是它不仅可以动态的去设置对象成员的值，还可以动态的去设置成员的名字。 例如： 12345var myDataName = 'height'var myDataValue = '1.75m'person[myDataName] = myDataValueperson.height// 1.75m 即括号表示法可以来接收变量作为名字，而点表示法不能。 设置对象成员既然能够访问对象的成员，那么也能对对象成员进行修改，增加。 123456//更改对象的属性值person.name.last = 'An'person['name']['last'] = 'An'//为对象新创建一个属性person['gender'] = 'male' person.farewell = function() &#123; alert("Bye everybody!") &#125; 关于this 关键字”this”指向了当前代码运行时的对象( 原文：the current object the code is being written inside )——这里即指person对象。 开始使用构造器(construnctor)时，”this”是非常有用的——它保证了当代码的上下文(context)改变时变量的值的正确性 。 （比如：不同的person对象拥有不同的name这个属性，很明显greeting这个方法需要使用的是它们自己的name）。 面向对象编程(OOP) 理论 创建对象实例的过程我们称之为实例化，即实例对象被类实例化。 多态——描述多个对象拥有实现共同方法的能力。（比如说一个基于person类而创建出的student类[继承]） 构造函数和对象实例1.构造对象： JavaScript 用一种称为构造函数的特殊函数来定义对象和它们的特征。构造函数非常有用，因为很多情况下您不知道实际需要多少个对象（实例）。构造函数提供了创建您所需对象（实例）的有效方法，将对象的数据和特征函数按需联结至相应对象。 1234567//创建构造函数function Person(name)&#123; this.name = name; this.greeting = function() &#123; alert('Hi! I\'m ' + this.name + '.'); &#125;;&#125; Note:一个构造函数通常是大写字母开头，这样便于区分构造函数和普通函数。 12//调用构造函数来实例化对象var person1 = new Person('Bob'); 123456//在这里很像Java里面实例化对象，java里：Person person1 = new Person();//总之不要搞混了:)/*特地写就是怕学了几天的JS到时候和java的东西弄混了。就好像‘JavaScript和java一样都可以 new 一个对象’。但是事实上JavaScript里并没有java里的class一样的东西。*/ 123//访问对象的属性和方法person1['greeting']() // = person1.greeting()person1.name // = person1['name'] 2.创建对象实例的其他方法： Object()构造函数 12345678910111213141516//创建了一个空对象var person1 = new Object();//添加属性person1.name = 'Chris';person1['age'] = 38;person1.greeting = function() &#123; alert('Hi! I\'m ' + this.name + '.');&#125;//也可以这样var person1 = new Object(&#123; name : 'Chris', age : 38, greeting : function() &#123; alert('Hi! I\'m ' + this.name + '.'); &#125;&#125;); create()方法 12//person2是基于person1创建的， 它们具有相同的属性和方法。var person2 = Object.create(person1);]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[js学习笔记-Hoisting]]></title>
-    <url>%2F2019%2F02%2F08%2Fjs%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Hoisting%2F</url>
-    <content type="text"></content>
+    <url>%2F2019%2F02%2F09%2Fjs%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Hoisting%2F</url>
+    <content type="text"><![CDATA[JavaScript中的声明提升（Hoisting）。 Hoisting(提升) 这个词是用来解释 变量 和 函数声明 是如何被提升到 函数或全局 作用域顶部的。 JS中的提升有变量提升和函数声明提升。 12345678910var a = 1;console.log( a + '+' + b);var b = 2;//上面这个代码和下面的代码相同var a = 1;var b;//只是声明提升，而不是初始化也跟着提升。console.log( a + '+' + b);b = 2; 1234567891011121314f();function f()&#123; console.log(a); var a = 1;&#125;//上面这个代码和下面的代码相同function f()&#123; var a; console.log(a);//undefined a = 1;&#125;f(); 12345678//函数声明会被提升，但是函数表达式却不会被提升。// Uncaught TypeError: f is not a functionf();var f = function ()&#123; console.log(a); var a = 2;&#125;//函数声明的优先级要大于变量声明。 SCDN上的一个有趣的例子： 1234567891011121314151617181920212223alert(a); // ??a(); // ??var a = 3;function a()&#123; alert(10);&#125;alert(a) // ??a = 6;a(); // ??//按照函数和变量声明提升后应该是这种顺序：function a()&#123; //先进行函数声明提升 alert(10);&#125;alert(a); // =alert(10)a(); //10;var a; //再进行变量声明提升；a = 3;alert(a); //3;a = 6;a(); // a is not a function.//即a这个时候已经是一个变量了，而不是一个函数。不能调用了。]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[js学习笔记-事件]]></title>
