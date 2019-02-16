@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="js,">
+  <meta name="keywords" content="js,API,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="JavaScript的原型式继承。">
-<meta name="keywords" content="js">
+<meta name="description" content="有关于应用程序接口（API）的简单介绍与操作文档API的介绍。">
+<meta name="keywords" content="js,API">
 <meta property="og:type" content="article">
-<meta property="og:title" content="js学习笔记-继承">
-<meta property="og:url" content="https://fangmuheng.github.io/2019/02/11/js学习笔记-继承/index.html">
+<meta property="og:title" content="js学习笔记-API（一）">
+<meta property="og:url" content="https://fangmuheng.github.io/2019/02/14/js学习笔记-API/index.html">
 <meta property="og:site_name" content="方慕珩">
-<meta property="og:description" content="JavaScript的原型式继承。">
+<meta property="og:description" content="有关于应用程序接口（API）的简单介绍与操作文档API的介绍。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-12T11:28:28.229Z">
+<meta property="og:updated_time" content="2019-02-16T08:46:19.274Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="js学习笔记-继承">
-<meta name="twitter:description" content="JavaScript的原型式继承。">
+<meta name="twitter:title" content="js学习笔记-API（一）">
+<meta name="twitter:description" content="有关于应用程序接口（API）的简单介绍与操作文档API的介绍。">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://fangmuheng.github.io/2019/02/11/js学习笔记-继承/">
+  <link rel="canonical" href="https://fangmuheng.github.io/2019/02/14/js学习笔记-API/">
 
 
 
 
 
-  <title>js学习笔记-继承 | 方慕珩</title>
+  <title>js学习笔记-API（一） | 方慕珩</title>
   
 
 
@@ -295,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fangmuheng.github.io/2019/02/11/js学习笔记-继承/">
+    <link itemprop="mainEntityOfPage" href="https://fangmuheng.github.io/2019/02/14/js学习笔记-API/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Fangmuheng">
@@ -312,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">js学习笔记-继承</h1>
+          <h1 class="post-title" itemprop="name headline">js学习笔记-API（一）</h1>
         
 
         <div class="post-meta">
@@ -324,8 +324,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-11T17:07:56+08:00">
-                2019-02-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-14T18:02:41+08:00">
+                2019-02-14
               </time>
             
 
@@ -365,8 +365,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/02/11/js学习笔记-继承/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/11/js学习笔记-继承/" itemprop="commentCount"></span>
+                <a href="/2019/02/14/js学习笔记-API/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/14/js学习笔记-API/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -393,7 +393,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  871字
+                  2k字
                 </span>
               
 
@@ -409,7 +409,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3分钟
+                  7分钟
                 </span>
               
             </div>
@@ -430,37 +430,94 @@
       
 
       
-        <p>JavaScript的原型式继承。<br><a id="more"></a></p>
-<p>JavaScript使用了另一套实现方式，继承的对象函数并不是通过复制而来，而是通过原型链继承（通常被称为 <strong>原型式继承 ——</strong> <strong>prototypal inheritance）</strong>。 </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//我们定义一个Teacher构造器，继承Person构造器的所有内容。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Teacher</span>(<span class="params">first, last, age, gender, interests, subject</span>) </span>&#123;</span><br><span class="line">  Person.call(<span class="keyword">this</span>, first, last, age, gender, interests);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.subject = subject;    <span class="comment">//this指向Teacher()函数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>有关于应用程序接口（API）的简单介绍与操作文档API的介绍。</p>
+<a id="more"></a>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><blockquote>
+<p>应用程序接口（API）是基于编程语言构建的结构，使开发人员更容易地创建复杂的功能。它们抽象了复杂的代码，并提供一些简单的接口规则直接使用。 </p>
+</blockquote>
+<h4 id="客户端JavaScript中的API"><a href="#客户端JavaScript中的API" class="headerlink" title="客户端JavaScript中的API"></a>客户端JavaScript中的API</h4><p>这些API并不是JavaScript语言中的一部分，但是建立在JavaScript语言核心的顶部，为JavaScript代码提供强大的功能。</p>
+<p>通常它们分为两类：</p>
 <ul>
-<li><code>call()</code>函数能够调用一个在这个文件里别处定义的函数。第一个参数指明了在运行这个函数时想对“this”指定的值，也就是说，您可以重新指定您调用的函数里所有“this”指向的对象。</li>
-<li>有关于this，可以这么理解：定义一个新的属性，然后把this.新属性传入call()函数中。</li>
+<li>浏览器API：内置于web浏览器中，能从浏览器和电脑周边环境中提取数据。</li>
+<li>第三方API：缺省情况下不会内置于浏览器中，必须在web中的某个地方获取代码和信息。</li>
 </ul>
-<p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Product</span>(<span class="params">name, price</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">  <span class="keyword">this</span>.price = price;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Food</span>(<span class="params">name, price</span>) </span>&#123;</span><br><span class="line">  Product.call(<span class="keyword">this</span>, name, price);</span><br><span class="line">  <span class="keyword">this</span>.category = <span class="string">'food'</span>;   <span class="comment">//注意这里，新定义了一个属性，其值‘food’是只属于Food这个构造函数的。</span></span><br><span class="line">&#125;                           <span class="comment">//这个this指向的是Food构造器的参数</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> Food(<span class="string">'cheese'</span>, <span class="number">5</span>).price);  <span class="comment">//返回5</span></span><br></pre></td></tr></table></figure>
-<h5 id="继承无参构造函数时"><a href="#继承无参构造函数时" class="headerlink" title="继承无参构造函数时"></a>继承无参构造函数时</h5><p>如果继承的构造函数不从传入的参数来获取属性值时，则不需要在<code>call()</code>中为其指定其他参数。 </p>
-<p>例如当您的构造函数是无参的情况下可以这么继承：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Brick</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.width = <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">this</span>.height = <span class="number">20</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//继承Brick()</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">BlueGlassBrick</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  Brick.call(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.opacity = <span class="number">0.5</span>;</span><br><span class="line">  <span class="keyword">this</span>.color = <span class="string">'blue'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//在这个示例中，我们把this传入了call()中。</span></span><br></pre></td></tr></table></figure>
-<h5 id="从原型对象里继承方法"><a href="#从原型对象里继承方法" class="headerlink" title="从原型对象里继承方法"></a>从原型对象里继承方法</h5><p>回到teacher构造器，我们用以下方式来继承：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Teacher.prototype = <span class="built_in">Object</span>.create(Person.prototype);</span><br></pre></td></tr></table></figure>
-<p>用create()函数来创建一个和<code>Person.prototype</code>一样的新的原型属性值（这个属性指向一个包括属性和方法的对象），然后将其赋给<code>Teacher.prototype</code>。<code>Teacher.prototype</code>现在会继承<code>Person.prototype</code>的所有属性和方法。 </p>
-<p>但是这里还有一点小问题。因为我们使用call()来继承，则<code>Teacher()</code>构造器的<code>prototype</code>的<code>constructor</code>属性指向的是<code>Person()</code> ，而我们希望<code>constructor</code>属性指向的是<code>Teacher()</code>，所以需要手动改一下。</p>
-<p>即：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Teacher.prototype.constructor = Teacher;</span><br></pre></td></tr></table></figure>
-<p>这样<code>constructor</code>属性指向的就是<code>Teacher()</code>了。</p>
-<blockquote>
-<p>Note:  实际上Person === Person.prototype.constructor。每一个函数对象（<code>Function</code>）都有一个<code>prototype</code>属性，并且只有函数对象有<code>prototype</code>属性，因为<code>prototype</code>本身就是定义在<code>Function</code>对象下的属性。当我们输入类似<code>var person1=new Person(...)</code>来构造对象时，JavaScript实际上参考的是<code>Person.prototype</code>指向的对象（即<code>Person()函数</code>）来生成<code>person1</code>。<code>Person()</code>函数就是<code>Person.prototype</code>的构造函数。 </p>
-</blockquote>
+<h4 id="JavaScript、API和其他JavaScript工具之间的关系"><a href="#JavaScript、API和其他JavaScript工具之间的关系" class="headerlink" title="JavaScript、API和其他JavaScript工具之间的关系"></a>JavaScript、API和其他JavaScript工具之间的关系</h4><blockquote>
 <ul>
-<li><p>为什么用call()继承只有属性没有方法？</p>
-<blockquote>
-<p>答：在定义新的构造函数时，我们通过<code>call()</code>来调用父类的构造函数，但是这样无法自动指定新的构造函数的<code>prototype</code>的值，这样新的构造函数的<code>prototype</code>就只能包含在构造函数里构造的属性，而没有方法。因此我们利用<code>Object.create()</code>方法将<code>Person.prototype</code>作为<code>Teacher.prototype</code>的原型对象，并改变其构造器指向，使之与<code>Teacher</code>关联。 </p>
+<li>JavaScript — 一种内置于浏览器的高级脚本语言，可以用来实现Web页面/应用中的功能。</li>
+<li>客户端API — 内置于浏览器的结构程序，位于JavaScript语言顶部，使您可以更容易的实现功能。</li>
+<li>第三方API — 置于第三方普通的结构程序（例如Twitter，Facebook），使您可以在自己的Web页面中使用那些平台的某些功能。</li>
+<li>JavaScript库 — 通常是包含具有特定功能的一个或多个JavaScript文件，把这些文件关联到您的Web页以快速或授权编写常见的功能。例如包含jQuery和Mootools</li>
+<li>JavaScript框架 — 从库开始的下一步，JavaScript框架视图把HTML、CSS、JavaScript和其他安装的技术打包在一起，然后用来从头编写一个完整的Web应用。</li>
+</ul>
 </blockquote>
+<p>API列表查询：<a href="https://developer.mozilla.org/en-US/docs/Web/API" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/API</a></p>
+<h4 id="常见API"><a href="#常见API" class="headerlink" title="常见API"></a>常见API</h4><ul>
+<li>操作文档API [内置于浏览器中，例如：DOM API]，允许操作html/css。</li>
+<li>从服务器获取数据API ：用于更新一小部分而非整体网页（Ajax</li>
+<li>绘制、操作图形API ：常用<code>&lt;canvas&gt;</code>来创建2D和3D场景。</li>
+<li>视频音频API ：例如<code>HTMLMediaElement</code>。创建用于播放音频视频的自定义UI控件，显示字幕和视频等。</li>
+<li>设备API：以对网络应用程序有用的方式操作和检索现代设备硬件中的数据的API </li>
+<li>客户端存储API ：创建一个应用程序来保存页面加载之间的状态、甚至让设备在处于脱机状态时可用。</li>
+</ul>
+<h4 id="常见的第三方API"><a href="#常见的第三方API" class="headerlink" title="常见的第三方API"></a>常见的第三方API</h4><ul>
+<li>The <a href="https://dev.twitter.com/overview/documentation" target="_blank" rel="noopener">Twitter API</a>, 允许您在您的网站上展示您最近的推文等。</li>
+<li>The <a href="https://developers.google.com/maps/" target="_blank" rel="noopener">Google Maps API</a> 允许你在网页上对地图进行很多操作（也是Google地图的驱动器）。现在它是一整套完整的，能够胜任广泛任务的API。其能力已经被<a href="https://developers.google.com/maps/documentation/api-picker" target="_blank" rel="noopener">Google Maps API Picker</a>见证。</li>
+<li>The <a href="https://developers.facebook.com/docs/" target="_blank" rel="noopener">Facebook suite of API</a> 允许你将很多Facebook生态系统中的功能应用到你的app，使之受益，比如说它提供了通过Facebook账户登录、接受应用内支付、推送有针对性的广告活动等功能。</li>
+<li>The <a href="https://developers.google.com/youtube/" target="_blank" rel="noopener">YouTube API</a>, 允许你将Youtube上的视频嵌入到网站中去，同时提供搜索Youtube，创建播放列表等众多功能。</li>
+<li>The <a href="https://www.twilio.com/" target="_blank" rel="noopener">Twilio API</a>, 其为您的app提供了针对语音通话和视频聊天的框架，以及从您的app发送短信息或多媒体信息等诸多功能。</li>
+</ul>
+<p>【更多国外API可参考：<a href="https://www.programmableweb.com/category/all/apis】" target="_blank" rel="noopener">https://www.programmableweb.com/category/all/apis】</a></p>
+<p>【国内一些API汇总：<a href="https://github.com/Fangmuheng/-Api（仅供学习使用，非商用）】" target="_blank" rel="noopener">https://github.com/Fangmuheng/-Api（仅供学习使用，非商用）】</a></p>
+<h3 id="各类API详细介绍"><a href="#各类API详细介绍" class="headerlink" title="各类API详细介绍"></a>各类API详细介绍</h3><h4 id="操作文档（DOM-API）"><a href="#操作文档（DOM-API）" class="headerlink" title="操作文档（DOM API）"></a>操作文档（DOM API）</h4><p>web页面视图中浏览器的主要部分：</p>
+<ul>
+<li><p>window     ：    载入浏览器的标签，在JavaScript中用<code>Window</code>对象表示。</p>
+<p>可以用于：可以返回窗口的大小（<code>Window.innerWidth</code>和<code>Window.innerHeight</code>），操作载入窗口的文档，存储客户端上文档的特殊数据（例如使用本地数据库或其他存储设备），为当前窗口绑定<code>event handler</code>，等等 </p>
+</li>
+<li><p>navigator ：     表示存在于web上的状态和标识（用户代理），JavaScript中用<code>Navigator</code>表示。</p>
+<p>可以用于：对这个对象获取一些信息，比如用户摄像头的地理信息、用户偏爱语言、多媒体流等。</p>
+</li>
+<li><p>document ：     （浏览器中用DOM表示）是载入窗口的十几页面。JavaScript中用<code>Document</code>表示。</p>
+<p>可以用于：用这个对象来返回和操作文档中HTML和CSS上的信息。</p>
 </li>
 </ul>
-<p>所以<strong>在构造器函数里定义属性，在prototype 属性上定义方法，并且永远使用父类的<code>prototype</code>来创造子类的<code>prototype</code></strong> 是一种比较严谨的方式。</p>
-<p>//除了本文提到的继承方式以外其他的继承方式参见：<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes</a></p>
+<blockquote>
+<p>文档中每个元素和文本在树中都有它们自己的入口 — 称之为<strong>节点</strong> </p>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>元素节点</strong>: 一个元素，存在于DOM中。</li>
+<li><strong>根节点</strong>: 树中顶层节点，在HTML的情况下，总是一个<code>HTML</code>节点（SVG和定制XML将有不同的根元素）。</li>
+<li><strong>子节点</strong>: <em>直接</em>位于另一个节点内的节点。</li>
+<li><strong>后代节点</strong>: 位于另一个节点内<em>任意位置</em>的节点。</li>
+<li><strong>父节点</strong>: 里面有另一个节点的节点。</li>
+<li><strong>兄弟节点</strong>: DOM树中位于同一等级的节点。</li>
+<li><strong>文本节点</strong>: 包含文字串的节点</li>
+</ul>
+</blockquote>
+<h5 id="获取元素"><a href="#获取元素" class="headerlink" title="获取元素"></a>获取元素</h5><p><strong><code>document.querySelector()</code>是目前浏览器主流的方式。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//存储在link里的元素&lt;a&gt;的引用。调用会匹配它在文档中遇到的第一个&lt;a&gt;元素。</span></span><br><span class="line"><span class="keyword">var</span> link = <span class="built_in">document</span>.querySelector(<span class="string">'a'</span>); </span><br><span class="line">link.textContent = <span class="string">'Mozilla Developer Network'</span>;<span class="comment">//链接名</span></span><br><span class="line">link.href = <span class="string">'https://developer.mozilla.org'</span>;<span class="comment">//链接</span></span><br></pre></td></tr></table></figure>
+<p>Note:如果想要匹配文档中所有的元素，可以使用：<code>Document.querySelectorAll()</code>，这个方法匹配文档中每个匹配选择器的元素，并把它们的引用存储在一个<strong>array</strong>中。 </p>
+<h5 id="获取元素的其他方法"><a href="#获取元素的其他方法" class="headerlink" title="获取元素的其他方法"></a>获取元素的其他方法</h5><ul>
+<li><code>Document.getElementById()</code>，选择一个<code>id</code>属性值已知的元素，例如<code>&lt;p id=&quot;myId&quot;&gt;My paragraph&lt;/p&gt;</code>。id作为参数传递给函数，即 <code>var elementRef = document.getElementById(&#39;myId&#39;)</code>。</li>
+<li><code>Document.getElementsByTagName()</code>，返回页面中包含的所有已知类型元素的数组。如<code>&lt;p&gt;</code>, <code>&lt;a&gt;</code>。元素类型作为参数传递给函数，即<code>var elementRefArray = document.getElementsByTagName(&#39;p&#39;)</code>.</li>
+</ul>
+<h5 id="创建并放置节点"><a href="#创建并放置节点" class="headerlink" title="创建并放置节点"></a>创建并放置节点</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sect = <span class="built_in">document</span>.querySelector(<span class="string">'section'</span>);</span><br><span class="line"><span class="keyword">var</span> para = <span class="built_in">document</span>.createElement(<span class="string">'p'</span>);<span class="comment">//创建新段落</span></span><br><span class="line">para.textContent = <span class="string">'We hope you enjoyed the ride.'</span>;</span><br><span class="line">sect.appendChild(para);<span class="comment">//该函数用于追加创建的新段落于section内</span></span><br><span class="line"><span class="keyword">var</span> text = <span class="built_in">document</span>.createTextNode(<span class="string">' — the premier source for web development knowledge.'</span>);</span><br><span class="line"><span class="keyword">var</span> linkPara = <span class="built_in">document</span>.querySelector(<span class="string">'p'</span>);<span class="comment">//创建文本节点</span></span><br><span class="line">linkPara.appendChild(text);</span><br></pre></td></tr></table></figure>
+<h5 id="移动和删除节点"><a href="#移动和删除节点" class="headerlink" title="移动和删除节点"></a>移动和删除节点</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这样可以把linkPara移动到section底部</span></span><br><span class="line">sect.appendChild(linkPara);</span><br></pre></td></tr></table></figure>
+<p>如果一个节点你有引用它的父节点，那么删除这个节点是很容易的，用<code>父节点.removeChild()</code>可以做到，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//section是linkPara的父节点，我们删除linkPara可以这样做</span></span><br><span class="line">sect.removeChild(linkPara);</span><br></pre></td></tr></table></figure>
+<p>但如果没有引用父节点，要删除一个仅基于自身引用的节点，我们需要用<code>本节点.parentNode.removeChild()</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//我们如果没有sect，那么我们需要这样做：</span></span><br><span class="line"><span class="comment">//因为没有哪个方法会让节点删除自己:)</span></span><br><span class="line">linkPara.parentNode.removeChild(linkPara);</span><br></pre></td></tr></table></figure>
+<h5 id="操作样式"><a href="#操作样式" class="headerlink" title="操作样式"></a>操作样式</h5><p>通过JavaScript以不同的方式来操作CSS样式 。</p>
+<p>第一种方法：直接在想要动态设置样式的元素内部添加内联样式，用<code>HTMLElement.style</code>来实现。</p>
+<p>这个属性包含了文档中每个元素的内联样式信息。可以设置这个对象的属性直接修改元素样式。</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">para.style.color = <span class="string">'white'</span>;</span><br><span class="line">para.style.backgroundColor = <span class="string">'black'</span>;</span><br><span class="line">para.style.padding = <span class="string">'10px'</span>;</span><br><span class="line">para.style.width = <span class="string">'250px'</span>;</span><br><span class="line">para.style.textAlign = <span class="string">'center'</span>;</span><br></pre></td></tr></table></figure>
+<p>Note:CSS样式的JavaSript属性版本以小驼峰式命名法书写，而CSS版本带连接符号（<code>backgroundColor</code> 对 <code>background-color</code>）。 </p>
+<p>第二种方法： <code>Element.setAttribute()</code></p>
+<p>两个参数，第一个是：你想在元素上设置的属性，第二个是：你要为它设置的值。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//例如</span><br><span class="line"> <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">.highlight &#123;</span></span><br><span class="line"><span class="undefined">  color: white;</span></span><br><span class="line"><span class="undefined">  background-color: black;</span></span><br><span class="line"><span class="undefined">  padding: 10px;</span></span><br><span class="line"><span class="undefined">  width: 250px;</span></span><br><span class="line"><span class="undefined">  text-align: center;</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">//修改样式</span><br><span class="line">para.setAttribute('class', 'highlight');</span><br></pre></td></tr></table></figure>
+<p>小例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> div = <span class="built_in">document</span>.querySelector(<span class="string">'div'</span>);<span class="comment">//先匹配文档中的div属性</span></span><br><span class="line"><span class="comment">// Window对象有一个称为resize的可用事件。每次窗口调整大小时都会触发该事件</span></span><br><span class="line"><span class="built_in">window</span>.onresize = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	WIDTH = <span class="built_in">window</span>.innerWidth;</span><br><span class="line">	HEIGHT = <span class="built_in">window</span>.innerHeight;</span><br><span class="line">	div.style.width = WIDTH + <span class="string">'px'</span>;</span><br><span class="line">	div.style.height = HEIGHT +<span class="string">'px'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//这样我们每改动一下窗口，图片就会随着窗口的改变而改变以适应屏幕大小</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -480,6 +537,8 @@
           
             <a href="/tags/js/" rel="tag"><i class="fa fa-tag"></i> js</a>
           
+            <a href="/tags/API/" rel="tag"><i class="fa fa-tag"></i> API</a>
+          
         </div>
       
 
@@ -491,8 +550,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/11/js学习笔记-对象原型/" rel="next" title="js学习笔记-对象原型">
-                <i class="fa fa-chevron-left"></i> js学习笔记-对象原型
+              <a href="/2019/02/12/js学习笔记-JSON/" rel="next" title="js学习笔记-JSON">
+                <i class="fa fa-chevron-left"></i> js学习笔记-JSON
               </a>
             
           </div>
@@ -500,10 +559,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/12/js学习笔记-JSON/" rel="prev" title="js学习笔记-JSON">
-                js学习笔记-JSON <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -683,7 +738,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#继承无参构造函数时"><span class="nav-text">继承无参构造函数时</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#从原型对象里继承方法"><span class="nav-text">从原型对象里继承方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#客户端JavaScript中的API"><span class="nav-text">客户端JavaScript中的API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JavaScript、API和其他JavaScript工具之间的关系"><span class="nav-text">JavaScript、API和其他JavaScript工具之间的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常见API"><span class="nav-text">常见API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常见的第三方API"><span class="nav-text">常见的第三方API</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#各类API详细介绍"><span class="nav-text">各类API详细介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#操作文档（DOM-API）"><span class="nav-text">操作文档（DOM API）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#获取元素"><span class="nav-text">获取元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取元素的其他方法"><span class="nav-text">获取元素的其他方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建并放置节点"><span class="nav-text">创建并放置节点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#移动和删除节点"><span class="nav-text">移动和删除节点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#操作样式"><span class="nav-text">操作样式</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
