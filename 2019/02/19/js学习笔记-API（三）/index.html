@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="js,">
+  <meta name="keywords" content="js,API,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="JavaScript中的对象原型介绍。">
-<meta name="keywords" content="js">
+<meta name="description" content="JavaScript中有关于绘图API的基础知识（1）。">
+<meta name="keywords" content="js,API">
 <meta property="og:type" content="article">
-<meta property="og:title" content="js学习笔记-对象原型">
-<meta property="og:url" content="https://fangmuheng.github.io/2019/02/11/js学习笔记-对象原型/index.html">
+<meta property="og:title" content="js学习笔记-API（三）">
+<meta property="og:url" content="https://fangmuheng.github.io/2019/02/19/js学习笔记-API（三）/index.html">
 <meta property="og:site_name" content="方慕珩">
-<meta property="og:description" content="JavaScript中的对象原型介绍。">
+<meta property="og:description" content="JavaScript中有关于绘图API的基础知识（1）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-11T08:56:48.723Z">
+<meta property="og:updated_time" content="2019-02-19T11:43:50.256Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="js学习笔记-对象原型">
-<meta name="twitter:description" content="JavaScript中的对象原型介绍。">
+<meta name="twitter:title" content="js学习笔记-API（三）">
+<meta name="twitter:description" content="JavaScript中有关于绘图API的基础知识（1）。">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://fangmuheng.github.io/2019/02/11/js学习笔记-对象原型/">
+  <link rel="canonical" href="https://fangmuheng.github.io/2019/02/19/js学习笔记-API（三）/">
 
 
 
 
 
-  <title>js学习笔记-对象原型 | 方慕珩</title>
+  <title>js学习笔记-API（三） | 方慕珩</title>
   
 
 
@@ -295,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fangmuheng.github.io/2019/02/11/js学习笔记-对象原型/">
+    <link itemprop="mainEntityOfPage" href="https://fangmuheng.github.io/2019/02/19/js学习笔记-API（三）/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Fangmuheng">
@@ -312,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">js学习笔记-对象原型</h1>
+          <h1 class="post-title" itemprop="name headline">js学习笔记-API（三）</h1>
         
 
         <div class="post-meta">
@@ -324,8 +324,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-11T15:15:07+08:00">
-                2019-02-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-19T17:20:19+08:00">
+                2019-02-19
               </time>
             
 
@@ -365,8 +365,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/02/11/js学习笔记-对象原型/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/11/js学习笔记-对象原型/" itemprop="commentCount"></span>
+                <a href="/2019/02/19/js学习笔记-API（三）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/19/js学习笔记-API（三）/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -393,7 +393,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.4k字
+                  1.7k字
                 </span>
               
 
@@ -409,7 +409,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5分钟
+                  6分钟
                 </span>
               
             </div>
@@ -430,42 +430,89 @@
       
 
       
-        <p>JavaScript中的对象原型介绍。</p>
+        <p>JavaScript中有关于绘图API的基础知识（1）。</p>
 <a id="more"></a>
+<h4 id="绘图API"><a href="#绘图API" class="headerlink" title="绘图API"></a>绘图API</h4><p>学习目标：使用 WebGL 库来创建一个 3D 场景 </p>
 <blockquote>
-<p>JavaScript 常被描述为一种<strong>基于原型的语言 (prototype-based language)</strong>——每个对象拥有一个<strong>原型对象</strong>，对象以其原型为模板、从原型继承方法和属性。原型对象也可能拥有原型，并从中继承方法和属性，一层一层、以此类推。这种关系常被称为<strong>原型链 (prototype chain)</strong>，它解释了为何一个对象会拥有定义在其他对象中的属性和方法。 </p>
-<p>在传统的 OOP 中，首先定义“类”，此后创建对象实例时，类中定义的所有属性和方法都被复制到实例中。在 JavaScript 中并不如此复制——而是在对象实例和它的构造器之间建立一个链接（它是<code>__proto__</code>属性，指向这个对象的构造函数的原型对象，是从构造函数的<code>prototype</code>属性派生的），之后通过上溯原型链，在构造器中找到这些属性和方法 。</p>
+<p>IE 8 及以下不支持 2D 画布，IE 11 及以下不支持WebGL（ (Web图形库) 是一种JavaScript API ）。 </p>
 </blockquote>
-<p>在此感谢<a href="https://www.cnblogs.com/gulei/p/6733707.html这篇文章给予我的启迪" target="_blank" rel="noopener">https://www.cnblogs.com/gulei/p/6733707.html这篇文章给予我的启迪</a></p>
-<p>（这篇文章解释的很棒<code>_(:з」∠)_</code>）。</p>
-<p>在JavaScript中，每个函数都有一个特殊的属性叫做<code>原型（prototype）</code>，如下图示例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.log( doSomething.prototype );</span><br><span class="line"><span class="comment">// It does not matter how you declare the function, a</span></span><br><span class="line"><span class="comment">//  function in javascript will always have a default</span></span><br><span class="line"><span class="comment">//  prototype property.</span></span><br><span class="line"><span class="keyword">var</span> doSomething = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;; </span><br><span class="line"><span class="built_in">console</span>.log( doSomething.prototype );<span class="comment">//原型为：Object()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//会出现以下结果：</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">constructor</span>: ƒ doSomething(),</span><br><span class="line">    __proto__: &#123;                             </span><br><span class="line">        <span class="keyword">constructor</span>: ƒ Object(),</span><br><span class="line">        hasOwnProperty: ƒ hasOwnProperty(),</span><br><span class="line">        isPrototypeOf: ƒ isPrototypeOf(),</span><br><span class="line">        propertyIsEnumerable: ƒ propertyIsEnumerable(),</span><br><span class="line">        toLocaleString: ƒ toLocaleString(),</span><br><span class="line">        toString: ƒ toString(),</span><br><span class="line">        valueOf: ƒ valueOf()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//也可以添加一些属性</span><br><span class="line">function doSomething()&#123;&#125;</span><br><span class="line">doSomething.prototype.foo = <span class="string">"bar"</span>;</span><br><span class="line"><span class="built_in">console</span>.log( doSomething.prototype );</span><br><span class="line"></span><br><span class="line"><span class="comment">//结果如下:</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    foo: <span class="string">"bar"</span>,</span><br><span class="line">    <span class="keyword">constructor</span>: ƒ doSomething(),</span><br><span class="line">    __proto__: &#123;……&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果你new了一个对象，创建一个doSomething的实例，也就是如下图所示：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> doSomeInstancing = <span class="keyword">new</span> doSomething();</span><br><span class="line">doSomeInstancing.prop = <span class="string">"some value"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(doSomeInstancing);</span><br><span class="line"></span><br><span class="line"><span class="comment">//会出现以下结果：</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    prop: <span class="string">"some value"</span>,</span><br><span class="line">    __proto__: &#123;</span><br><span class="line">        foo: <span class="string">"bar"</span>,</span><br><span class="line">        <span class="keyword">constructor</span>: ƒ doSomething(),</span><br><span class="line">        __proto__: &#123;</span><br><span class="line">            <span class="keyword">constructor</span>: ƒ Object(),</span><br><span class="line">            hasOwnProperty: ƒ hasOwnProperty(),</span><br><span class="line">            isPrototypeOf: ƒ isPrototypeOf(),</span><br><span class="line">            propertyIsEnumerable: ƒ propertyIsEnumerable(),</span><br><span class="line">            toLocaleString: ƒ toLocaleString(),</span><br><span class="line">            toString: ƒ toString(),</span><br><span class="line">            valueOf: ƒ valueOf()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注释：当你访问doSomeInstancing的一个属性的时候，浏览器会先在doSomeInstancing中是否有这个属性。如果没有，就会在doSomething的<code>__proto__</code>中（即：doSomething.prototype）寻找这个属性。如果没有，就会继续再往上找，直到找到或者没找到返回undefined。</p>
-<p>//一个很不正经的理解：我个人是觉得原型对象和构造器函数应该是：原型对象拥有一个构造函数，构造函数用来创建对象并且赋予对象私有的能力，而原型对象给这些对象提供了一些共有的能力（这个能力其实还是由原型对象来代劳）。</p>
-<h5 id="prototype-属性"><a href="#prototype-属性" class="headerlink" title="prototype 属性"></a>prototype 属性</h5><blockquote>
-<p>我们创建的对象并不能完全继承Object();因为继承的属性和方法是定义在prototype属性上的，即那些以 <code>Object.prototype.</code> 开头的属性，而非仅仅以 <code>Object.</code> 开头的属性。 于是 <code>Object.prototype.watch()、Object.prototype.valueOf()</code> 等等成员，适用于任何继承自 <code>Object()</code> 的对象类型。而<code>Object.is()</code>、<code>Object.keys()</code>，以及其他不在 <code>prototype</code> 对象内的成员，不会被“对象实例”或“继承自 <code>Object()</code> 的对象类型”所继承。这些方法/属性仅能被 <code>Object()</code> 构造器自身使用。 </p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person2 = <span class="built_in">Object</span>.create(person1);</span><br><span class="line"><span class="comment">//这个person2是以person1为原型对象创建的，所以person2.__proto__会返回person1</span></span><br></pre></td></tr></table></figure>
-<h5 id="constructor-属性"><a href="#constructor-属性" class="headerlink" title="constructor 属性"></a>constructor 属性</h5><p>每个实例对象都从原型中继承了一个constructor属性，该属性指向了用于构造此实例对象的构造函数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">person1.constructor   <span class="comment">//Person()</span></span><br></pre></td></tr></table></figure>
+<h5 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h5><p>要在网页中创建 2D 或者 3D 场景，必须在 HTML 文件中插入一个<code>&lt;canvas&gt;</code>元素，以界定网页中的绘图区域。 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--网页中会生成一块 320 × 240 像素的画布--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">width</span>=<span class="string">"320"</span> <span class="attr">height</span>=<span class="string">"240"</span>&gt;</span> <span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="创建画布及确定尺寸"><a href="#创建画布及确定尺寸" class="headerlink" title="创建画布及确定尺寸"></a>创建画布及确定尺寸</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--不明确指定宽高时，画布默认尺寸为 300 × 150 像素--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--class用于选择多个画布--&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">class</span>=<span class="string">"myCanvas"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>添加恰当的反馈信息。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>确定尺寸的时候我们可以在JavaScript中添加代码，如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//需要可视化窗口同样大小的画布时可以这么做</span></span><br><span class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.querySelector(<span class="string">'.myCanvas'</span>);</span><br><span class="line"><span class="keyword">var</span> width = canvas.width = <span class="built_in">window</span>.innerWidth;</span><br><span class="line"><span class="keyword">var</span> height = canvas.height = <span class="built_in">window</span>.innerHeight;</span><br></pre></td></tr></table></figure>
+<p>Note：</p>
+<p>1.在这里我们定义了width和height两个变量，在后面绘图的时候我们可以使用这两个变量很快捷地访问画布的宽和长。</p>
+<p>2.这个时候文档还是有滚动条的，我们把 <code>&lt;body&gt;</code> 元素的外边距（margin）设为0，并把overflow隐藏就可以.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">  body &#123;</span></span><br><span class="line"><span class="undefined">    margin: 0;</span></span><br><span class="line"><span class="undefined">    overflow: hidden;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="获取画布上下文（canvas-context）并完成设置"><a href="#获取画布上下文（canvas-context）并完成设置" class="headerlink" title="获取画布上下文（canvas context）并完成设置"></a>获取画布上下文（canvas context）并完成设置</h5><p>需要获得一个对绘画区域的特殊的引用（称为“<strong>上下文</strong>”）用来在画布上绘图 。</p>
+<p>当我们需要一个2D画布，可以使用 <code>HTMLCanvasElement.getContext()</code>方法获得基础绘图功能：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>可以在 <code>constructor</code> 属性的末尾添加一对圆括号（括号中包含所需的参数），从而用这个构造器创建另一个对象实例。毕竟构造器是一个函数，故可以通过圆括号调用；只需在前面添加 <code>new</code> 关键字，便能将此函数作为构造器使用。 </p>
+<p><code>ctx</code> 变量包含一个 <code>CanvasRenderingContext2D</code> 对象，画布上所有绘画操作都会涉及到这个对象。 </p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//如：</span></span><br><span class="line"><span class="keyword">var</span> person3 = <span class="keyword">new</span> person1.constructor(<span class="string">'Karen'</span>, <span class="string">'Stephenson'</span>, <span class="number">26</span>, <span class="string">'female'</span>, [<span class="string">'playing drums'</span>, <span class="string">'mountain climbing'</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">//和以下代码一样：</span></span><br><span class="line"><span class="keyword">var</span> person3 = <span class="keyword">new</span> Person(<span class="string">'Karen'</span>, <span class="string">'Stephenson'</span>, <span class="number">26</span>, <span class="string">'female'</span>, [<span class="string">'playing drums'</span>, <span class="string">'mountain climbing'</span>]);</span><br></pre></td></tr></table></figure>
-<p>此外，<code>constructor</code> 属性还有其他用途。想要获得某个对象实例的构造器的名字可以这么用：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">person1.constructor.name</span><br></pre></td></tr></table></figure>
-<h5 id="修改原型"><a href="#修改原型" class="headerlink" title="修改原型"></a>修改原型</h5><p>我们可以通过构造函数来修改构造器的 <code>prototype</code> 属性 。</p>
-<p>比如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//我们用Person（）构造函数为prototype添加了一个farewell方法</span></span><br><span class="line">Person.prototype.farewell = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.name.first + <span class="string">' has left the building. Bye for now!'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//用我们创建的对象来调用，会发现可以运行</span></span><br><span class="line">person1.farewell();</span><br><span class="line"><span class="comment">//整条继承链动态地更新了，任何由此构造器创建的对象实例都自动获得了这个方法。</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>fillStlye</code>属性：设置填充色。</li>
+<li><code>fillRect()</code>方法：绘制覆盖整个区域的矩形，有四个参数。前两个参数是矩形左上顶点的坐标，后两个参数是矩形的长宽 </li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ctx.fillStyle = <span class="string">'rgb(0,0,0)'</span>;<span class="comment">//黑色，色值属性与css相同</span></span><br><span class="line">ctx.fillRect(<span class="number">0</span>,<span class="number">0</span>,width,height);</span><br></pre></td></tr></table></figure>
+<h5 id="简单矩形"><a href="#简单矩形" class="headerlink" title="简单矩形"></a>简单矩形</h5><blockquote>
+<p>许多操作都需要提供坐标来指示绘图的确切位置。画布左上角的坐标是(0, 0)，横坐标（x）轴向右延伸，纵坐标（y）轴向下延伸。</p>
+</blockquote>
+<p>绘制一个矩形我们就可以使用<code>fillStlye</code>属性和<code>fillRect()</code>方法。</p>
+<p>注意：</p>
+<p>1.新层会覆盖旧层。</p>
+<p>2.<code>rgba()</code>可以绘制半透明的图形，包括 <strong>rgb</strong> 和<strong>a</strong> 四个参数，<strong>a</strong> 指定了“α 通道”的值，也就是颜色的透明度。值越高透明度越高，底层的内容就越清晰。 </p>
+<p>如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ctx.fillStyle = <span class="string">'rgba(255, 0, 255, 0.75)'</span>;<span class="comment">//这里 a = 0.75</span></span><br><span class="line">ctx.fillRect(<span class="number">25</span>, <span class="number">100</span>, <span class="number">175</span>, <span class="number">50</span>);</span><br></pre></td></tr></table></figure>
+<h5 id="描边（stroke）和线条宽度"><a href="#描边（stroke）和线条宽度" class="headerlink" title="描边（stroke）和线条宽度"></a>描边（stroke）和线条宽度</h5><ul>
+<li><code>strokeStlye</code>属性：设置填充色。</li>
+<li><code>strokeRect()</code>方法：绘制覆盖整个区域的矩形，有四个参数。前两个参数是矩形左上顶点的坐标，后两个参数是矩形的长宽 </li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ctx.strokeStyle = <span class="string">'rgb(255, 255, 255)'</span>;</span><br><span class="line">ctx.strokeRect(<span class="number">25</span>, <span class="number">25</span>, <span class="number">175</span>, <span class="number">200</span>);</span><br></pre></td></tr></table></figure>
+<p>默认的描边宽度是 1 像素，可以通过调整 <code>lineWidth</code>属性的值来修改</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctx.lineWidth = <span class="number">5</span>;<span class="comment">//添加在绘图方法之前</span></span><br></pre></td></tr></table></figure>
+<h5 id="绘制路径"><a href="#绘制路径" class="headerlink" title="绘制路径"></a>绘制路径</h5><ul>
+<li><code>beginPath()</code>：在钢笔<strong>当前所在位置</strong>开始绘制一条路径。在新的画布中，钢笔起始位置为 (0, 0)。</li>
+<li><code>moveTo()</code>：将钢笔<strong>移动至另一个坐标点</strong>，不记录、不留痕迹，只将钢笔“跳”至新位置。</li>
+<li><code>fill()</code>：通过为当前所绘制路径的区域<strong>填充颜色</strong>来绘制一个新的填充形状。</li>
+<li><code>stroke()</code>：通过为当前绘制路径的区域<strong>描边</strong>，来绘制一个只有边框的形状。</li>
+<li>路径也可和矩形一样使用 <code>lineWidth</code> 和 <code>fillStyle</code> / <code>strokeStyle</code> 等功能。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//绘制简单路径的基本步骤</span></span><br><span class="line">ctx.fillStyle = <span class="string">'rgb(255, 0, 0)'</span>;<span class="comment">//颜色</span></span><br><span class="line">ctx.beginPath();<span class="comment">//开始绘制</span></span><br><span class="line">ctx.moveTo(<span class="number">50</span>, <span class="number">50</span>);<span class="comment">//钢笔目前所在坐标</span></span><br><span class="line">ctx.fill();<span class="comment">// 绘制路径</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将角度换算为弧度，在为 JavaScript 提供角度值时非常实用，JS 基本上只接受弧度值，而人类更习惯用角度值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">degToRad</span>(<span class="params">degrees</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> degrees * <span class="built_in">Math</span>.PI / <span class="number">180</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>三角形</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ctx.fillStyle = <span class="string">'rgb(255, 0, 0)'</span>;</span><br><span class="line">ctx.beginPath();</span><br><span class="line">ctx.moveTo(<span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line"><span class="comment">//以上是基本步骤</span></span><br><span class="line">ctx.lineTo(<span class="number">150</span>, <span class="number">50</span>);<span class="comment">//移动到（150,50）</span></span><br><span class="line"><span class="keyword">var</span> triHeight = <span class="number">50</span> * <span class="built_in">Math</span>.tan(degToRad(<span class="number">60</span>));<span class="comment">//计算三角形的高</span></span><br><span class="line">ctx.lineTo(<span class="number">100</span>, <span class="number">50</span>+triHeight);<span class="comment">//移动</span></span><br><span class="line">ctx.lineTo(<span class="number">50</span>, <span class="number">50</span>);<span class="comment">//移动</span></span><br><span class="line">ctx.fill();<span class="comment">//填充</span></span><br></pre></td></tr></table></figure>
+<p><strong>圆</strong>：</p>
+<p><code>arc()</code>方法：有六个参数。前两个指定圆心的位置坐标，第三个是圆的半径，第四、五个是绘制弧的起、止角度（给定 0° 和 360° 便能绘制一个完整的圆），第六个是绘制方向（<code>false</code> 是顺时针，<code>true</code> 是逆时针）。</p>
+<p>【0°：水平向右】 </p>
+<p>如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//圆心坐标（150,106），圆半径50，起止角度0-360，顺时针。</span></span><br><span class="line">ctx.arc(<span class="number">150</span>, <span class="number">106</span>, <span class="number">50</span>, degToRad(<span class="number">0</span>), degToRad(<span class="number">360</span>), <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>旧有对象实例的可用功能被自动更新了。这证明了先前描述的原型链模型。这种继承模型下，上游对象的方法不会复制到下游的对象实例中；下游对象本身虽然没有定义这些方法，但浏览器会通过上溯原型链、从上游对象中找到它们。这种继承模型提供了一个强大而可扩展的功能系统。 </p>
+<p>如果要填充一个未完成（也就是没有首尾相接）的路径，浏览器将在起、止点件绘制一条直线，然后直接填充。 </p>
 </blockquote>
-<p>Note：你可能会在 <code>prototype</code> 上定义常属性 (constant property) （指那些你永远无需改变的属性），但一般来说，在构造器内定义属性更好。 </p>
-<p>一种极其常见的对象定义模式是，<strong>在构造器（函数体）中定义属性、在 prototype 属性上定义方法</strong>。如此，构造器只包含属性定义，而方法则分装在不同的代码块，代码更具可读性。</p>
-<p>即如下代码所示：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构造器及其属性定义</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test</span>(<span class="params">a,b,c,d</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 属性定义</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义第一个方法</span></span><br><span class="line"></span><br><span class="line">Test.prototype.x = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义第二个方法</span></span><br><span class="line"></span><br><span class="line">Test.prototype.y = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等等……</span></span><br></pre></td></tr></table></figure>
+<h5 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h5><p>以下两个函数用于绘制文本：</p>
+<ul>
+<li><code>fillText()</code>：绘制有填充色的文本。</li>
+<li><code>strokeText()</code>：绘制文本外边框（描边）。</li>
+</ul>
+<p>Note:</p>
+<p>1.这两个函数有三个基本的参数：需要绘制的文字、文本框（顾名思义，围绕着需要绘制文字的方框）左上顶点的X、Y坐标。</p>
+<p>2.还有一系列帮助控制文本渲染的属性：比如用于指定字体族、字号的 <code>font</code>，它的值和语法与 CSS 的 <code>font</code> 属性一致。 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ctx.strokeStyle = <span class="string">'white'</span>;<span class="comment">//边框颜色白色</span></span><br><span class="line">ctx.lineWidth = <span class="number">1</span>;<span class="comment">//边框厚度1</span></span><br><span class="line">ctx.font = <span class="string">'36px arial'</span>;<span class="comment">//字体大小</span></span><br><span class="line">ctx.strokeText(<span class="string">'Canvas text'</span>, <span class="number">50</span>, <span class="number">50</span>);<span class="comment">//描边。第一个参数文字，第二三个参数为坐标。</span></span><br><span class="line"></span><br><span class="line">ctx.fillStyle = <span class="string">'red'</span>;<span class="comment">//填充颜色红色</span></span><br><span class="line">ctx.font = <span class="string">'48px georgia'</span>;<span class="comment">//字体大小</span></span><br><span class="line">ctx.fillText(<span class="string">'Canvas text'</span>, <span class="number">50</span>, <span class="number">150</span>);<span class="comment">//填充。第一个参数文字，第二三个参数为坐标。</span></span><br></pre></td></tr></table></figure>
+<h5 id="在画布上绘制图片"><a href="#在画布上绘制图片" class="headerlink" title="在画布上绘制图片"></a>在画布上绘制图片</h5><p><code>drawImage()</code>方法可将图片绘制在画布上。 </p>
+<p>首先：使用Image()构造器new一个image对象。</p>
+<p>其次：然后将它的 <code>src</code> 属性设置为 图片链接。 </p>
+<p>最后：<code>drawImage</code>方法嵌入图片。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> image = <span class="keyword">new</span> Image();</span><br><span class="line">image.src = <span class="string">'firefox.png'</span>;</span><br><span class="line">image.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> 	ctx.drawImage(image, <span class="number">20</span>, <span class="number">20</span>, <span class="number">185</span>, <span class="number">175</span>, <span class="number">50</span>, <span class="number">50</span>, <span class="number">185</span>, <span class="number">175</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>drawImage()</code>方法的几个参数：</p>
+<ul>
+<li>第一个：图片引用。（刚开始创建的一个图片对象）</li>
+<li>第二、三个：裁切部分左上顶点的坐标，参考原点为原图片本身左上角的坐标。原图片在该坐标左、上的部分均不会绘制出来。 </li>
+<li>第四、五个：裁切部分的长、宽 </li>
+<li>第六、七个：裁切部分左上顶点在画布中的位置坐标，参考原点为画布左上顶点 </li>
+<li>第八、九个：裁切部分在画布中绘制的长、宽 </li>
+</ul>
 
       
     </div>
@@ -485,6 +532,8 @@
           
             <a href="/tags/js/" rel="tag"><i class="fa fa-tag"></i> js</a>
           
+            <a href="/tags/API/" rel="tag"><i class="fa fa-tag"></i> API</a>
+          
         </div>
       
 
@@ -496,8 +545,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/09/js学习笔记-对象/" rel="next" title="js学习笔记-对象">
-                <i class="fa fa-chevron-left"></i> js学习笔记-对象
+              <a href="/2019/02/16/js学习笔记-API（二）/" rel="next" title="js学习笔记-API（二）">
+                <i class="fa fa-chevron-left"></i> js学习笔记-API（二）
               </a>
             
           </div>
@@ -505,10 +554,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/11/js学习笔记-继承/" rel="prev" title="js学习笔记-继承">
-                js学习笔记-继承 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -688,7 +733,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#prototype-属性"><span class="nav-text">prototype 属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#constructor-属性"><span class="nav-text">constructor 属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修改原型"><span class="nav-text">修改原型</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#绘图API"><span class="nav-text">绘图API</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#开始"><span class="nav-text">开始</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建画布及确定尺寸"><span class="nav-text">创建画布及确定尺寸</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取画布上下文（canvas-context）并完成设置"><span class="nav-text">获取画布上下文（canvas context）并完成设置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#简单矩形"><span class="nav-text">简单矩形</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#描边（stroke）和线条宽度"><span class="nav-text">描边（stroke）和线条宽度</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#绘制路径"><span class="nav-text">绘制路径</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文本"><span class="nav-text">文本</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在画布上绘制图片"><span class="nav-text">在画布上绘制图片</span></a></li></ol></li></ol></div>
             
 
           </div>
