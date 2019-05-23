@@ -87,12 +87,16 @@
 <meta property="og:site_name" content="方慕珩">
 <meta property="og:description" content="[数据结构]-[树结构]知识点：树的定义、二叉树、线索二叉树、树的存储结构、哈夫曼树。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://fangmuheng.github.io/2019/05/23/数据结构-树结构/Fangmuheng/Fangmuheng/source/_posts/数据结构-树结构/1.jpg">
-<meta property="og:updated_time" content="2019-05-23T07:28:41.925Z">
+<meta property="og:image" content="https://images0.cnblogs.com/i/497634/201403/270929194211610.jpg">
+<meta property="og:image" content="https://images0.cnblogs.com/i/497634/201403/270929530778327.jpg">
+<meta property="og:image" content="https://images0.cnblogs.com/i/497634/201403/270930282184259.jpg">
+<meta property="og:image" content="https://images0.cnblogs.com/i/497634/201403/270931211084932.jpg">
+<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/007E7mbEly1g3bc4ditaaj30tg0ljq50.jpg">
+<meta property="og:updated_time" content="2019-05-23T08:46:24.764Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构-树结构">
 <meta name="twitter:description" content="[数据结构]-[树结构]知识点：树的定义、二叉树、线索二叉树、树的存储结构、哈夫曼树。">
-<meta name="twitter:image" content="https://fangmuheng.github.io/2019/05/23/数据结构-树结构/Fangmuheng/Fangmuheng/source/_posts/数据结构-树结构/1.jpg">
+<meta name="twitter:image" content="https://images0.cnblogs.com/i/497634/201403/270929194211610.jpg">
 
 
 
@@ -395,7 +399,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  51字
+                  1.7k字
                 </span>
               
 
@@ -411,7 +415,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1分钟
+                  6分钟
                 </span>
               
             </div>
@@ -435,7 +439,75 @@
         <p>[数据结构]-[树结构]知识点：树的定义、二叉树、线索二叉树、树的存储结构、哈夫曼树。</p>
 <a id="more"></a>
 <p>部分图片与知识点转载于：<a href="http://www.cnblogs.com/skywang12345/p/3576328.html" target="_blank" rel="noopener">http://www.cnblogs.com/skywang12345/p/3576328.html</a> </p>
-<p><img src="//fangmuheng.github.io/2019/05/23/数据结构-树结构/Fangmuheng\Fangmuheng\source\_posts\数据结构-树结构\1.jpg" alt="树1"></p>
+<h3 id="1-树"><a href="#1-树" class="headerlink" title="1.树"></a>1.树</h3><h4 id="0-结构"><a href="#0-结构" class="headerlink" title="0.结构"></a>0.结构</h4><p>线性结构：线性表、栈、队列、串、数组、广义表。</p>
+<p>非线性结构：树和二叉树、图、网。</p>
+<h4 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h4><p><strong>树是n（n≥0）个结点的有限集。</strong></p>
+<p>n=0时为空树。</p>
+<p>n&gt;1时，有且仅有一个称为该树的根的结点。</p>
+<p><img src="https://images0.cnblogs.com/i/497634/201403/270929194211610.jpg" alt="树1"></p>
+<h4 id="2-特殊术语"><a href="#2-特殊术语" class="headerlink" title="2.特殊术语"></a>2.特殊术语</h4><p>1.若一个结点有子树，那么该结点称为子树根的<strong>“双亲”</strong>，子树的根是该结点的<strong>“孩子”</strong>。</p>
+<p>2.有相同双亲的结点互为<strong>“兄弟”</strong>。同一层号的结点称为<strong>“堂兄弟”</strong>。</p>
+<p>3.一个结点的所有子树上的任何结点都是该结点的<strong>子孙</strong>。从根结点到某个结点的路径上的所有结点都是该结点的<strong>祖先</strong>。</p>
+<p>4.<strong>结点的度</strong>：结点拥有的子树的数目。<br>5.<strong>叶子</strong>（终端节点）：度为零的结点。<br>6.<strong>分支结点</strong>：度不为零的结点。<br>7.<strong>树的度</strong>：树中结点的最大的度。</p>
+<p>8.<strong>n度树</strong>：度为n的树。</p>
+<p>9.<strong>层次</strong>：<strong>根结点的层次为1</strong>，其余结点的层次等于该结点的双亲结点的层次加1。<br>树的高度：树中结点的最大层次。</p>
+<p>10.<strong>树的深度</strong>：各结点层的最大值。</p>
+<p>11.<strong>无序树</strong>：如果树中结点的各子树之间的次序是不重要的，可以交换位置。<br><strong>有序树</strong>：如果树中结点的各子树之间的次序是重要的, 不可以交换位置。<br>12.<strong>森林</strong>：0个或多个不相交的树组成。对森林加上一个根，森林即成为树；删去根，树即成为森林。</p>
+<h4 id="3-树结构的特点"><a href="#3-树结构的特点" class="headerlink" title="3.树结构的特点"></a>3.树结构的特点</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">线性结构</th>
+<th style="text-align:center">树型结构</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">第一个数据元素（无前驱）</td>
+<td style="text-align:center">根结点（无前驱）</td>
+</tr>
+<tr>
+<td style="text-align:center">最后一个数据元素（无后继）</td>
+<td style="text-align:center">多个叶子结点（无“后继”）</td>
+</tr>
+<tr>
+<td style="text-align:center">其他数据元素（1前驱，1后继）</td>
+<td style="text-align:center">其他数据元素（1前驱，多后继）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-二叉树"><a href="#2-二叉树" class="headerlink" title="2.二叉树"></a>2.二叉树</h3><h4 id="1-定义和术语"><a href="#1-定义和术语" class="headerlink" title="1.定义和术语"></a>1.定义和术语</h4><p>二叉树是是n（n≥0）个结点的有限集，或是空树，或由一个根节点和两棵分别为左子树和右子树的互不相交的二叉树构成。</p>
+<p>特点：</p>
+<p>1.每个结点之多有两棵子树。</p>
+<p>2.子树有左右之分，不能颠倒次序。</p>
+<p><img src="https://images0.cnblogs.com/i/497634/201403/270929530778327.jpg" alt="树2"></p>
+<h4 id="2-性质"><a href="#2-性质" class="headerlink" title="2.性质"></a>2.性质</h4><h5 id="1-二叉树第i层上的结点数目最多为2的i-1次方-i≥1"><a href="#1-二叉树第i层上的结点数目最多为2的i-1次方-i≥1" class="headerlink" title="1.二叉树第i层上的结点数目最多为2的i-1次方 (i≥1)."></a>1.二叉树第i层上的结点数目最多为2的i-1次方 (i≥1).</h5><p>证明：下面用”数学归纳法”进行证明。<br>        (01) 当i=1时，第i层的节点数目为2^{i-1}=2^{0}=1。因为第1层上只有一个根结点，所以命题成立。<br>        (02) 假设当i&gt;1，第i层的节点数目为2^{i-1}。这个是根据(01)推断出来的！<br>               下面根据这个假设，推断出”第(i+1)层的节点数目为2^{i}”即可。<br>                由于二叉树的每个结点至多有两个孩子，故”第(i+1)层上的结点数目” 最多是 “第i层的结点数目的2倍”。即，第(i+1)层上的结点数目最大值=2×2^{i-1}=2^{i}。<br>                故假设成立，原命题得证！</p>
+<h5 id="2-深度为k的二叉树至多有2-k-1个结点-k≥1"><a href="#2-深度为k的二叉树至多有2-k-1个结点-k≥1" class="headerlink" title="2.深度为k的二叉树至多有2^k-1个结点(k≥1)."></a>2.深度为k的二叉树至多有2^k-1个结点(k≥1).</h5><p>证明：在具有相同深度的二叉树中，当每一层都含有最大结点数时，其树中结点数最多。利用”性质1”可知，深度为k的二叉树的结点数至多为：<br>           2^0+2^1+…+2^(k-1)=2^k-1<br>           故原命题得证！</p>
+<h5 id="3-包含n个结点的二叉树的深度至少为log2-n-1"><a href="#3-包含n个结点的二叉树的深度至少为log2-n-1" class="headerlink" title="3.包含n个结点的二叉树的深度至少为log2 (n+1)"></a>3.包含n个结点的二叉树的深度至少为log2 (n+1)</h5><p>证明：根据”性质2”可知，高度为h的二叉树最多有2{h}–1个结点。反之，对于包含n个节点的二叉树的高度至少为log2(n+1)。</p>
+<h5 id="4-叶子的数目-度为2的结点数-1，即：n0-n2-1"><a href="#4-叶子的数目-度为2的结点数-1，即：n0-n2-1" class="headerlink" title="4.叶子的数目 = 度为2的结点数+1，即：n0 = n2 +1"></a>4.叶子的数目 = 度为2的结点数+1，即：n0 = n2 +1</h5><p>证明：因为二叉树中所有结点的度数均不大于2，所以结点总数(记为n)=”0度结点数(n0)” + “1度结点数(n1)” + “2度结点数(n2)”。由此，得到等式一。<br>         (等式一) n=n0+n1+n2<br>　     另一方面，0度结点没有孩子，1度结点有一个孩子，2度结点有两个孩子，故二叉树中孩子结点总数是：n1+2n2。此外，只有根不是任何结点的孩子。故二叉树中的结点总数又可表示为等式二。<br>         (等式二) n=n1+2n2+1<br>        由(等式一)和(等式二)计算得到：n0=n2+1。原命题得证！</p>
+<h4 id="3-满二叉树"><a href="#3-满二叉树" class="headerlink" title="3.满二叉树"></a>3.满二叉树</h4><h5 id="1-定义-1"><a href="#1-定义-1" class="headerlink" title="1.定义"></a>1.定义</h5><p>深度为k，且有2^k-1个结点的二叉树。</p>
+<h5 id="2-性质-1"><a href="#2-性质-1" class="headerlink" title="2.性质"></a>2.性质</h5><p>1.n个结点的满二叉树的深度 = log2(n+1)</p>
+<p>2.左小孩为偶数，右小孩为奇数。</p>
+<p>3.结点i的左小孩是2i，结点i的右小孩为2i+1，结点i的双亲为i/2向下取整。</p>
+<p>4.结点i的层号 = log2i向下取整+1 = log2(i+1)向上取整</p>
+<p><img src="https://images0.cnblogs.com/i/497634/201403/270930282184259.jpg" alt="树3"></p>
+<h4 id="4-完全二叉树"><a href="#4-完全二叉树" class="headerlink" title="4.完全二叉树"></a>4.完全二叉树</h4><h5 id="1-定义-2"><a href="#1-定义-2" class="headerlink" title="1.定义"></a>1.定义</h5><p>一棵二叉树中，只有最下面两层结点的度可以小于2，并且最下一层的叶结点集中在靠左的若干位置上。这样的二叉树称为完全二叉树。</p>
+<p><img src="https://images0.cnblogs.com/i/497634/201403/270931211084932.jpg" alt="树4"></p>
+<h5 id="2-性质-2"><a href="#2-性质-2" class="headerlink" title="2.性质"></a>2.性质</h5><p>1.除了最后一层缺一些节点，其余都是满的。（叶子节点只可能出现在层次最大或次大的两层上）</p>
+<p>2.满二叉树一定是完全二叉树，反之不一定。</p>
+<p>3.n个结点的完全二叉树深度为：log2n向下取整+1.</p>
+<p>4.</p>
+<p>(1) 若结点i = 1，则该结点为二叉树的根，无双亲，否则，编号为i/2向下取整的结点为i双亲结点。</p>
+<p>(2) 若2i&gt;n，则i结点没有左孩子，否则，编号为2i的结点为i左孩子结点。</p>
+<p>(3) 若2i+1&gt;n，则i结点没有右孩子，否则，编号为2i+1的结点为i右孩子结点。</p>
+<h4 id="5-二叉树的存储结构"><a href="#5-二叉树的存储结构" class="headerlink" title="5.二叉树的存储结构"></a>5.二叉树的存储结构</h4><p>顺序存储or链式存储？</p>
+<h5 id="1-顺序存储"><a href="#1-顺序存储" class="headerlink" title="1.顺序存储"></a>1.顺序存储</h5><p>使用一维数组存储二叉树，没有结点按0表示，表示为“虚节点”。</p>
+<p>缺点：占地方</p>
+<h5 id="2-链式实现"><a href="#2-链式实现" class="headerlink" title="2.链式实现"></a>2.链式实现</h5><p><img src="https://wx2.sinaimg.cn/mw690/007E7mbEly1g3bc4ditaaj30tg0ljq50.jpg" alt="树5"></p>
+<h6 id="1-ADT"><a href="#1-ADT" class="headerlink" title="1.ADT"></a>1.ADT</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Nil <span class="meta-string">'#'</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> TElemType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BinNode</span>&#123;</span></span><br><span class="line">    TElemType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">BinNode</span> *<span class="title">parent</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">BinNode</span> *<span class="title">lchild</span>,*<span class="title">rchild</span>;</span></span><br><span class="line">&#125;BinNode,*BinTree;</span><br></pre></td></tr></table></figure>
+<h6 id="2-初始化"><a href="#2-初始化" class="headerlink" title="2.初始化"></a>2.初始化</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">(BinTree *T)</span></span>&#123;</span><br><span class="line">    *T = <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="3-销毁"><a href="#3-销毁" class="headerlink" title="3.销毁"></a>3.销毁</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Destroy</span><span class="params">(BinTree *T)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(*T!=<span class="literal">NULL</span>)&#123;<span class="comment">//非空树</span></span><br><span class="line">        <span class="keyword">if</span>((*T)-&gt;lchild!=<span class="literal">NULL</span>)<span class="comment">//有左孩子</span></span><br><span class="line">            Destroy(&amp;(*T)-&gt;lchild);</span><br><span class="line">        <span class="keyword">if</span>((*T)-&gt;rchild!=<span class="literal">NULL</span>)<span class="comment">//有右孩子</span></span><br><span class="line">            Destroy(&amp;(*T)-&gt;rchild);</span><br><span class="line">        <span class="built_in">free</span>(*T);</span><br><span class="line">        *T = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="4-判空"><a href="#4-判空" class="headerlink" title="4.判空"></a>4.判空</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">IsEmpty</span><span class="params">(BinTree T)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> T == <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="5-深度"><a href="#5-深度" class="headerlink" title="5.深度"></a>5.深度</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Depth</span><span class="params">(BinTree T)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>)fmax(Depth(T-&gt;lchild),Depth(T-&gt;rchild))+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -562,8 +634,17 @@ var jiathis_config={
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -642,6 +723,22 @@ var jiathis_config={
       </section>
 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="110" src="//music.163.com/outchain/player?type=0&id=2651488515&auto=0&height=66"></iframe>
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-树"><span class="nav-text">1.树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#0-结构"><span class="nav-text">0.结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-定义"><span class="nav-text">1.定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-特殊术语"><span class="nav-text">2.特殊术语</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-树结构的特点"><span class="nav-text">3.树结构的特点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-二叉树"><span class="nav-text">2.二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-定义和术语"><span class="nav-text">1.定义和术语</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-性质"><span class="nav-text">2.性质</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-二叉树第i层上的结点数目最多为2的i-1次方-i≥1"><span class="nav-text">1.二叉树第i层上的结点数目最多为2的i-1次方 (i≥1).</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-深度为k的二叉树至多有2-k-1个结点-k≥1"><span class="nav-text">2.深度为k的二叉树至多有2^k-1个结点(k≥1).</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-包含n个结点的二叉树的深度至少为log2-n-1"><span class="nav-text">3.包含n个结点的二叉树的深度至少为log2 (n+1)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-叶子的数目-度为2的结点数-1，即：n0-n2-1"><span class="nav-text">4.叶子的数目 = 度为2的结点数+1，即：n0 = n2 +1</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-满二叉树"><span class="nav-text">3.满二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-定义-1"><span class="nav-text">1.定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-性质-1"><span class="nav-text">2.性质</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-完全二叉树"><span class="nav-text">4.完全二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-定义-2"><span class="nav-text">1.定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-性质-2"><span class="nav-text">2.性质</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-二叉树的存储结构"><span class="nav-text">5.二叉树的存储结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-顺序存储"><span class="nav-text">1.顺序存储</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-链式实现"><span class="nav-text">2.链式实现</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-ADT"><span class="nav-text">1.ADT</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-初始化"><span class="nav-text">2.初始化</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-销毁"><span class="nav-text">3.销毁</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-判空"><span class="nav-text">4.判空</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5-深度"><span class="nav-text">5.深度</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -670,7 +767,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">19.5k</span>
+    <span title="Site words total count">21.2k</span>
   
 
 
