@@ -17,7 +17,7 @@
   <entry>
     <title><![CDATA[如何在markdown文件里插入图片]]></title>
     <url>%2F2019%2F05%2F23%2F%E5%A6%82%E4%BD%95%E5%9C%A8markdown%E6%96%87%E4%BB%B6%E9%87%8C%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%2F</url>
-    <content type="text"><![CDATA[在个人博客里(Markdown文件里)插入图片的方法。 本地图片1![avatar](文件路径) 注意： 1.这种方法图片命名一定不要带括号（），会和这个代码括号重复导致无法识别，血泪的教训。 2.支持绝对路径和相对路径。 3.本地图片的路径更改或丢失都会造成markdown文件调不出图。 网络图片1![avatar](网络路径） 注意： 比较依赖于网络。 当然还需要插件，不过目前我还没整明白，这个博客就先放在这吧，等弄明白了再说。]]></content>
+    <content type="text"><![CDATA[在个人博客里(Markdown文件里)插入图片的方法。 本地图片1![avatar](文件路径) 注意： 1.这种方法图片命名一定不要带括号（），会和这个代码括号重复导致无法识别，血泪的教训。 2.支持绝对路径和相对路径。 3.本地图片的路径更改或丢失都会造成markdown文件调不出图。 网络图片1![avatar](网络路径） 注意： 比较依赖于网络。 一个小问题上传本地图片需要同时上传到github仓库里，在此安装一个插件： 1npm install hexo-asset-image --save 找到Hexo下的_config.yml里的post_asset_folder，把这个选项从false改成true。 然后把图片放在创建出来的同名文件夹下即可~]]></content>
       <categories>
         <category>技术</category>
       </categories>
