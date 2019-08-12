@@ -101,7 +101,18 @@
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw690/007E7mbEly1g5vonhnwcaj30r90i3tc2.jpg">
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw690/007E7mbEly1g5voworymej30ss0fhgo7.jpg">
 <meta property="og:image" content="http://wx4.sinaimg.cn/mw690/007E7mbEly1g5voniwz5wj30ow0indiz.jpg">
-<meta property="og:updated_time" content="2019-08-11T05:49:27.247Z">
+<meta property="og:image" content="http://wx4.sinaimg.cn/mw690/007E7mbEly1g5wrzjmpe9j30lt06ogmb.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw690/007E7mbEly1g5wrzj99t0j30py0gy76l.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw690/007E7mbEly1g5wrzhfj8lj30rg0hkq5h.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/007E7mbEly1g5wrzf12uzj30r10hytac.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/007E7mbEly1g5wrzk3zvbj30s70hlmyz.jpg">
+<meta property="og:image" content="http://wx4.sinaimg.cn/mw690/007E7mbEly1g5wrzgwb49j30rx0het9w.jpg">
+<meta property="og:image" content="http://wx4.sinaimg.cn/mw690/007E7mbEly1g5wrzfj7y2j30qj0hrjsv.jpg">
+<meta property="og:image" content="http://wx4.sinaimg.cn/mw690/007E7mbEly1g5wrzefnrzj30u00htta6.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw690/007E7mbEly1g5wrzibkn7j30ow0fdwfz.jpg">
+<meta property="og:image" content="http://wx4.sinaimg.cn/mw690/007E7mbEly1g5wrzg56lkj30ou0hqgoe.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw690/007E7mbEly1g5wrzisjrqj30om0h5goy.jpg">
+<meta property="og:updated_time" content="2019-08-12T04:24:19.736Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机组成原理-3">
 <meta name="twitter:description" content="计算第三章：系统总线。">
@@ -417,7 +428,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  845字
+                  1.6k字
                 </span>
               
 
@@ -433,7 +444,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2分钟
+                  5分钟
                 </span>
               
             </div>
@@ -531,7 +542,83 @@
 <p>（4）多层PCI总线结构</p>
 <p>【用桥来实现总线的扩展和驱动能力的提高】</p>
 <p><img src="http://wx4.sinaimg.cn/mw690/007E7mbEly1g5voniwz5wj30ow0indiz.jpg" alt="avatar"></p>
-<h4 id="5-总线控制"><a href="#5-总线控制" class="headerlink" title="5.总线控制"></a>5.总线控制</h4>
+<h4 id="5-总线控制"><a href="#5-总线控制" class="headerlink" title="5.总线控制"></a>5.总线控制</h4><h5 id="1、总线判优控制"><a href="#1、总线判优控制" class="headerlink" title="1、总线判优控制"></a>1、总线判优控制</h5><p>1.基本概念</p>
+<ul>
+<li>主设备（模块）  对总线有控制权。</li>
+<li>从设备（模块）  响应从主设备发来的总线命令。</li>
+</ul>
+<p><img src="http://wx4.sinaimg.cn/mw690/007E7mbEly1g5wrzjmpe9j30lt06ogmb.jpg" alt="avatar"></p>
+<p>2.链式查询方式</p>
+<p><img src="http://wx2.sinaimg.cn/mw690/007E7mbEly1g5wrzj99t0j30py0gy76l.jpg" alt="avatar"></p>
+<ul>
+<li>过程：先经过BR线对总线控制部件发出请求，总线控制部件经BG一个一个查找到底是哪个I/O设备发出的请求，找到以后再通过BS应答。（排在前面的I/O设备优先级高）</li>
+<li>优点：结构简单，主要就这么三条线。增加设备容易。优先级算法简单。进行可靠性设计的时候比较容易实现。</li>
+<li>缺点：对电路故障特别敏感。（尤其是BG，如果某一个接口电路出现故障，无法向后传，那么后面的都接收不到信号），速度比较慢。</li>
+</ul>
+<p>一般用于<strong>微型计算机或者简单的线路系统</strong>上。</p>
+<p>3.计数器定时查询方式</p>
+<p><img src="http://wx2.sinaimg.cn/mw690/007E7mbEly1g5wrzhfj8lj30rg0hkq5h.jpg" alt="avatar"></p>
+<p>【设备地址线和设备个数有关：Log2N向上取整】</p>
+<ul>
+<li>过程：计数器刚开始先显示为0，根据设备地址线找发出请求的设备，计数器逐渐变为1,2,3……如果找到了，就通过BS进行应答。</li>
+<li>优点：优先级确定灵活。</li>
+</ul>
+<p>4.独立请求方式</p>
+<p><img src="http://wx3.sinaimg.cn/mw690/007E7mbEly1g5wrzf12uzj30r10hytac.jpg" alt="avatar"></p>
+<ul>
+<li>优先级排序很灵活，在排队器里排队。</li>
+<li>缺点：用的线很多。</li>
+</ul>
+<h5 id="2、总线通信控制"><a href="#2、总线通信控制" class="headerlink" title="2、总线通信控制"></a>2、总线通信控制</h5><p>1.目的：解决通信双方协调配合问题</p>
+<p>2.总线传输周期：</p>
+<ul>
+<li>申请分配阶段：主模块申请，总线仲裁决定</li>
+<li>寻址阶段：主模块向从模块给出地址和命令</li>
+<li>传数阶段：主模块和从模块交换数据</li>
+<li>结束阶段：主模块撤销有关信息</li>
+</ul>
+<p>3.总线通信的四种方式</p>
+<ul>
+<li>同步通信：由统一时标控制数据传送</li>
+<li>异步通信：采用应答方式，没有公共时钟标准</li>
+<li>半同步通信：同步、异步结合</li>
+<li>分离式通信：充分挖掘系统总线每个瞬间的潜力</li>
+</ul>
+<p>（1）同步式数据输入</p>
+<p><img src="http://wx3.sinaimg.cn/mw690/007E7mbEly1g5wrzk3zvbj30s70hlmyz.jpg" alt="avatar"></p>
+<p>特点：有定宽、定距的时钟。给定的时间点上要完成相应的操作。</p>
+<p>（2）同步式数据输出</p>
+<p><img src="http://wx4.sinaimg.cn/mw690/007E7mbEly1g5wrzgwb49j30rx0het9w.jpg" alt="avatar"></p>
+<p>【即使有的设备速度快，也要按照最慢的速度进行输出】</p>
+<p>【一般应用于总线比较短，各个模块时间比较一致的情况下】</p>
+<p>（3）异步通信</p>
+<p><img src="http://wx4.sinaimg.cn/mw690/007E7mbEly1g5wrzfj7y2j30qj0hrjsv.jpg" alt="avatar"></p>
+<p>（4）半同步通信</p>
+<p><img src="http://wx4.sinaimg.cn/mw690/007E7mbEly1g5wrzefnrzj30u00htta6.jpg" alt="avatar"></p>
+<p><img src="http://wx2.sinaimg.cn/mw690/007E7mbEly1g5wrzibkn7j30ow0fdwfz.jpg" alt="avatar"></p>
+<p>【允许不同速度的设备通信】</p>
+<p>三种通信的共同点：</p>
+<p>一个总线传输周期：（以输入数据为例）</p>
+<ul>
+<li><p>主模块发地址、命令【占用总线】</p>
+</li>
+<li><p>从模块准备数据【不占用】-总线空闲（造成浪费！）</p>
+</li>
+<li><p>从模块向主模块发数据【占用】</p>
+<p><img src="http://wx4.sinaimg.cn/mw690/007E7mbEly1g5wrzg56lkj30ou0hqgoe.jpg" alt="avatar"></p>
+</li>
+</ul>
+<p>（5）分离式通信（解决总线空闲造成的浪费</p>
+<p><img src="http://wx1.sinaimg.cn/mw690/007E7mbEly1g5wrzisjrqj30om0h5goy.jpg" alt="avatar"></p>
+<p>特点：</p>
+<ul>
+<li>各模块有权申请占用总线</li>
+<li>采用同步方式通信，不等对方回答</li>
+<li>各个模块准备数据时，不占用总线</li>
+<li>总线被占用时，无空闲</li>
+</ul>
+<p>【充分提高了总线的有效占用】</p>
+
       
     </div>
     
@@ -763,7 +850,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-总线的基本概念"><span class="nav-text">1.总线的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-为什么要用总线"><span class="nav-text">1.为什么要用总线</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-总线（Bus）是什么"><span class="nav-text">2.总线（Bus）是什么</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-总线上信息的传送"><span class="nav-text">3.总线上信息的传送</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-总线结构的计算机举例"><span class="nav-text">4.总线结构的计算机举例</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-总线的分类"><span class="nav-text">2.总线的分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-总线特性及性能指标"><span class="nav-text">3.总线特性及性能指标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-总线结构"><span class="nav-text">4.总线结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-总线控制"><span class="nav-text">5.总线控制</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-总线的基本概念"><span class="nav-text">1.总线的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-为什么要用总线"><span class="nav-text">1.为什么要用总线</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-总线（Bus）是什么"><span class="nav-text">2.总线（Bus）是什么</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-总线上信息的传送"><span class="nav-text">3.总线上信息的传送</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-总线结构的计算机举例"><span class="nav-text">4.总线结构的计算机举例</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-总线的分类"><span class="nav-text">2.总线的分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-总线特性及性能指标"><span class="nav-text">3.总线特性及性能指标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-总线结构"><span class="nav-text">4.总线结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-总线控制"><span class="nav-text">5.总线控制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、总线判优控制"><span class="nav-text">1、总线判优控制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、总线通信控制"><span class="nav-text">2、总线通信控制</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -798,7 +885,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">37.4k</span>
+    <span title="Site words total count">38.1k</span>
   
 
 
