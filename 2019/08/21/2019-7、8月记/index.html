@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="js,">
+  <meta name="keywords" content="月记,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="JavaScript的原型式继承。">
-<meta name="keywords" content="js">
+<meta name="description" content="大二暑假7、8月的月记总结。">
+<meta name="keywords" content="月记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="js学习笔记-继承">
-<meta property="og:url" content="https://fangmuheng.github.io/2019/02/11/js学习笔记-继承/index.html">
+<meta property="og:title" content="2019-7、8月记">
+<meta property="og:url" content="https://fangmuheng.github.io/2019/08/21/2019-7、8月记/index.html">
 <meta property="og:site_name" content="方慕珩">
-<meta property="og:description" content="JavaScript的原型式继承。">
+<meta property="og:description" content="大二暑假7、8月的月记总结。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-12T11:28:28.229Z">
+<meta property="og:updated_time" content="2019-08-21T13:43:53.158Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="js学习笔记-继承">
-<meta name="twitter:description" content="JavaScript的原型式继承。">
+<meta name="twitter:title" content="2019-7、8月记">
+<meta name="twitter:description" content="大二暑假7、8月的月记总结。">
 
 
 
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="https://fangmuheng.github.io/2019/02/11/js学习笔记-继承/">
+  <link rel="canonical" href="https://fangmuheng.github.io/2019/08/21/2019-7、8月记/">
 
 
 
@@ -135,7 +135,7 @@
   daovoice('update');
   </script>
 
-  <title>js学习笔记-继承 | 方慕珩</title>
+  <title>2019-7、8月记 | 方慕珩</title>
   
 
 
@@ -304,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fangmuheng.github.io/2019/02/11/js学习笔记-继承/">
+    <link itemprop="mainEntityOfPage" href="https://fangmuheng.github.io/2019/08/21/2019-7、8月记/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Fangmuheng">
@@ -321,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">js学习笔记-继承</h1>
+          <h1 class="post-title" itemprop="name headline">2019-7、8月记</h1>
         
 
         <div class="post-meta">
@@ -333,8 +333,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-11T17:07:56+08:00">
-                2019-02-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-21T19:30:40+08:00">
+                2019-08-21
               </time>
             
 
@@ -356,8 +356,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
+                  <a href="/categories/月记及年终/" itemprop="url" rel="index">
+                    <span itemprop="name">月记及年终</span>
                   </a>
                 </span>
 
@@ -374,8 +374,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/02/11/js学习笔记-继承/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/11/js学习笔记-继承/" itemprop="commentCount"></span>
+                <a href="/2019/08/21/2019-7、8月记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/21/2019-7、8月记/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -402,7 +402,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  871字
+                  1.9k字
                 </span>
               
 
@@ -418,7 +418,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3分钟
+                  6分钟
                 </span>
               
             </div>
@@ -439,37 +439,36 @@
       
 
       
-        <p>JavaScript的原型式继承。<br><a id="more"></a></p>
-<p>JavaScript使用了另一套实现方式，继承的对象函数并不是通过复制而来，而是通过原型链继承（通常被称为 <strong>原型式继承 ——</strong> <strong>prototypal inheritance）</strong>。 </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//我们定义一个Teacher构造器，继承Person构造器的所有内容。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Teacher</span>(<span class="params">first, last, age, gender, interests, subject</span>) </span>&#123;</span><br><span class="line">  Person.call(<span class="keyword">this</span>, first, last, age, gender, interests);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.subject = subject;    <span class="comment">//this指向Teacher()函数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>大二暑假7、8月的月记总结。</p>
+<a id="more"></a>
+<h5 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h5><p>这两个月的假期过得几乎是我觉得所有假期里面最难受的一次了，因为大部分时间处于迷茫阶段，甚至有一段时间竟然‘不知道自己能做点什么来排遣无聊时光’了。就算是天天打游戏也不至于这样懵，显然是因为不甘于现状又懒惰不想努力罢了。看到别人取得的成就就会羡慕，自己又天天咸鱼，也难怪一直没什么进步了。</p>
+<h5 id="1-生活回顾"><a href="#1-生活回顾" class="headerlink" title="1.生活回顾"></a>1.生活回顾</h5><p>回看了一下5、6月记的暑假安排，发觉有一部分完成了，有一部分却被我抛在了脑后。</p>
 <ul>
-<li><code>call()</code>函数能够调用一个在这个文件里别处定义的函数。第一个参数指明了在运行这个函数时想对“this”指定的值，也就是说，您可以重新指定您调用的函数里所有“this”指向的对象。</li>
-<li>有关于this，可以这么理解：定义一个新的属性，然后把this.新属性传入call()函数中。</li>
+<li>炒菜：看上去只学会了炒肉，希望下个假期能不把菜炒焦了。我最拿手的糖醋里脊感觉也生疏了TAT</li>
+<li>计算机专业课-计原就学了三章……我也是服了自己了，存储器那一章太难啃了，我满脑子都是那些内容，快爆炸了QAQ。主要是考研有的学校也不用考408的话，我也不需要复习四门专业课了。毕竟可能计网比计原简单点？（…..）</li>
+<li>编程的话这个假期还真是没啥进展，数学建模的遗传算法倒是好不容易啃下来了，目前还不怎么会套用= =。</li>
+<li>化妆？呵呵。我再也不立flag了，反正回到家脸上长痘痘以后就再也不想往脸上抹什么东西了，我宁愿丑点。（靠）</li>
+<li>确实陪我妈去旅游了一趟，是河南南阳那边，去了龙潭沟啊老君洞什么的，伏牛地下河景点还不错，就是总感觉很阴沉。在那里莫名其妙地还想出了一个脑洞？</li>
+<li>！！恭喜我自己啊啊啊，科二科三科四顺利通过了，现在就坐等拿驾照！我真没想到自己这臭把式还能考过驾照，感谢国家感谢人民感谢CCTV。终于不用一回到家就想着学车，一瞬间都感觉开心不少。</li>
+<li>！！再次恭喜我自己，六级过了。好吧，虽然是飘过的。可怜兮兮的400多分的成绩，我都不好意思拿出来。不过管它了，反正是过了！可能到时候报夏令营不用纠结辣么多了QAQ，今年年底还有一次机会可以刷分，争取考高一点啊。</li>
+<li>！！好吧最后感谢我上个学期的努力，专业课成绩都不错，五六月月记没写出来自己考得咋样，因为那会也没敢查成绩。后来查完三门数学专业课都是90+，心才放下来了。总之还是越努力越幸运吧，这次专业排名应该是稳定了，再冲一把吧，万一能保呢？（怎么还在幻想啊啊啊啊）</li>
+<li>我这个假期居然打游戏水平上升了一大截……惭愧惭愧。当然我还是最爱我的寒冰，六级狗牌亮起来~（咳咳）</li>
+<li>小说写了两万字左右就写不下去了，尴尬。这篇文可能就坑了，因为思路卡壳，再加上人物关系图都在我宿舍放着……嗯……如果不出意外应该是写不下去了。开学再看看别的吧。不过前两天有个读者来问我我的书有没有实体版的，唉~那一瞬间真是突然有一种自己好像真的好厉害的样子，可惜没有实体版哈哈哈哈，网文而已咯，写着开心就是了。（虽然曾经出版一本书一直是我的梦想= =，后来发现自己太菜，任重道远吧。）</li>
+<li>这个假期居然一本实体书都没看，惭愧啊。那本《在细雨中呼喊》被我扔床头一直没有翻开过，突然觉得我好绝情~算了，开学拿两本过去，忙里偷闲看书果然还是爽啊。</li>
 </ul>
-<p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Product</span>(<span class="params">name, price</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">  <span class="keyword">this</span>.price = price;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Food</span>(<span class="params">name, price</span>) </span>&#123;</span><br><span class="line">  Product.call(<span class="keyword">this</span>, name, price);</span><br><span class="line">  <span class="keyword">this</span>.category = <span class="string">'food'</span>;   <span class="comment">//注意这里，新定义了一个属性，其值‘food’是只属于Food这个构造函数的。</span></span><br><span class="line">&#125;                           <span class="comment">//这个this指向的是Food构造器的参数</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> Food(<span class="string">'cheese'</span>, <span class="number">5</span>).price);  <span class="comment">//返回5</span></span><br></pre></td></tr></table></figure>
-<h5 id="继承无参构造函数时"><a href="#继承无参构造函数时" class="headerlink" title="继承无参构造函数时"></a>继承无参构造函数时</h5><p>如果继承的构造函数不从传入的参数来获取属性值时，则不需要在<code>call()</code>中为其指定其他参数。 </p>
-<p>例如当您的构造函数是无参的情况下可以这么继承：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Brick</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.width = <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">this</span>.height = <span class="number">20</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//继承Brick()</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">BlueGlassBrick</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  Brick.call(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.opacity = <span class="number">0.5</span>;</span><br><span class="line">  <span class="keyword">this</span>.color = <span class="string">'blue'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//在这个示例中，我们把this传入了call()中。</span></span><br></pre></td></tr></table></figure>
-<h5 id="从原型对象里继承方法"><a href="#从原型对象里继承方法" class="headerlink" title="从原型对象里继承方法"></a>从原型对象里继承方法</h5><p>回到teacher构造器，我们用以下方式来继承：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Teacher.prototype = <span class="built_in">Object</span>.create(Person.prototype);</span><br></pre></td></tr></table></figure>
-<p>用create()函数来创建一个和<code>Person.prototype</code>一样的新的原型属性值（这个属性指向一个包括属性和方法的对象），然后将其赋给<code>Teacher.prototype</code>。<code>Teacher.prototype</code>现在会继承<code>Person.prototype</code>的所有属性和方法。 </p>
-<p>但是这里还有一点小问题。因为我们使用call()来继承，则<code>Teacher()</code>构造器的<code>prototype</code>的<code>constructor</code>属性指向的是<code>Person()</code> ，而我们希望<code>constructor</code>属性指向的是<code>Teacher()</code>，所以需要手动改一下。</p>
-<p>即：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Teacher.prototype.constructor = Teacher;</span><br></pre></td></tr></table></figure>
-<p>这样<code>constructor</code>属性指向的就是<code>Teacher()</code>了。</p>
-<blockquote>
-<p>Note:  实际上Person === Person.prototype.constructor。每一个函数对象（<code>Function</code>）都有一个<code>prototype</code>属性，并且只有函数对象有<code>prototype</code>属性，因为<code>prototype</code>本身就是定义在<code>Function</code>对象下的属性。当我们输入类似<code>var person1=new Person(...)</code>来构造对象时，JavaScript实际上参考的是<code>Person.prototype</code>指向的对象（即<code>Person()函数</code>）来生成<code>person1</code>。<code>Person()</code>函数就是<code>Person.prototype</code>的构造函数。 </p>
-</blockquote>
+<h5 id="2-期望"><a href="#2-期望" class="headerlink" title="2.期望"></a>2.期望</h5><p>写一写下个学期要做的事情吧，毕竟开学以后空闲时间多了，就可以干点自己想做的事情了。（但还是要谨慎立flag，毕竟循序渐进很重要）</p>
 <ul>
-<li><p>为什么用call()继承只有属性没有方法？</p>
-<blockquote>
-<p>答：在定义新的构造函数时，我们通过<code>call()</code>来调用父类的构造函数，但是这样无法自动指定新的构造函数的<code>prototype</code>的值，这样新的构造函数的<code>prototype</code>就只能包含在构造函数里构造的属性，而没有方法。因此我们利用<code>Object.create()</code>方法将<code>Person.prototype</code>作为<code>Teacher.prototype</code>的原型对象，并改变其构造器指向，使之与<code>Teacher</code>关联。 </p>
-</blockquote>
-</li>
+<li>计原……能看多少是多少吧，量力而行。</li>
+<li>每两周一本书。</li>
+<li>每天背单词（考研单词/六级）、练听力。</li>
+<li>MOOC学习。</li>
+<li>其他想到再补充吧。</li>
 </ul>
-<p>所以<strong>在构造器函数里定义属性，在prototype 属性上定义方法，并且永远使用父类的<code>prototype</code>来创造子类的<code>prototype</code></strong> 是一种比较严谨的方式。</p>
-<p>//除了本文提到的继承方式以外其他的继承方式参见：<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes</a></p>
+<h5 id="3-感触"><a href="#3-感触" class="headerlink" title="3.感触"></a>3.感触</h5><p>发生了很多事，有的事不想提及了，有的事也难以忘怀。因为可能哪一时刻真正意识到离别才是人生的常态，又觉得人这一生总要活得快乐吧。因为失去了很多，已经没有什么可失去了的。这美好的一生总会遇到很多志同道合的人，有的人三观与你相同，有的人和你有相同的兴趣爱好，有的人愿意陪你谈天谈地，有的人喜欢和你待在一起的感觉。可是人生是一场漫长的旅途啊，总会有人与你同行，但你也要知道，有的人只能陪你走一段路罢了。只有真正地见识过你从不完整的心智到完整健全优秀的人，才会有不可或缺的感觉。即便这样的人对我而言几乎相当于没有吧。</p>
+<p>四月份换了一个很喜欢的个签：<strong>八月昏暗后窗，仲夏暴雨雷鸣</strong>。虽说已经立秋，从昨天到今天却一直在下雨。我很喜欢听雨声，就好像周围寂静，只剩我一个人。如果没有感冒我兴许还愿意撑把伞出去走走。奈何建模和感冒阻挠了我，只能待在家里一直盯着电脑研究建模了。</p>
+<p>我很多时间都意识到自己是多么的渺小，人生大概也是一种承认自己是个普通人的过程。就像后来看到的一句话：<strong>站在一级台阶上，自以为窥见了天光。</strong>一直用于警醒我自己要时刻注意言行，要保持学习态度。还记得曾经高中时我们还在埋头刷题之时，我无意间刷到了初中班长的空间，看了一些他写的不明所以的乱七八糟的符号，后来意识到他参加的是信息竞赛，写的是代码。感慨曾经无知~周围还是有如此之多的厉害的人的，但我在上大学之前甚至没有意识到和那些人的差距不只是成绩这么简单。</p>
+<p>可能普通人的一生也挺快乐幸福的，开学大三，考个研，找个工作，过平凡的生活。反正现在的生活已经比以前好了，我觉得快乐就在于，你一直在创造从来没有过的生活。这个是你自己创造出来的，而不是别人给你的，你会有成就感。即便我可能会遭遇什么挫折，但这也都是人生的一部分罢了，我经历过最差的，自然也就不怕那些小的挫折了。</p>
+<p>希望自己以后也要自信开朗啊，我们都在为生活挣扎着，没有人是轻松的。尽管如此，我还是希望以后遇到什么事，我能很勇敢很自信地告诉自己：我可以做到啊。</p>
 
       
     </div>
@@ -487,7 +486,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/js/" rel="tag"><i class="fa fa-tag"></i> js</a>
+            <a href="/tags/月记/" rel="tag"><i class="fa fa-tag"></i> 月记</a>
           
         </div>
       
@@ -500,8 +499,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/11/js学习笔记-对象原型/" rel="next" title="js学习笔记-对象原型">
-                <i class="fa fa-chevron-left"></i> js学习笔记-对象原型
+              <a href="/2019/08/15/计算机组成原理-4/" rel="next" title="计算机组成原理-4">
+                <i class="fa fa-chevron-left"></i> 计算机组成原理-4
               </a>
             
           </div>
@@ -509,10 +508,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/12/js学习笔记-JSON/" rel="prev" title="js学习笔记-JSON">
-                js学习笔记-JSON <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -706,7 +701,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#继承无参构造函数时"><span class="nav-text">继承无参构造函数时</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#从原型对象里继承方法"><span class="nav-text">从原型对象里继承方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#0-前言"><span class="nav-text">0.前言</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-生活回顾"><span class="nav-text">1.生活回顾</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-期望"><span class="nav-text">2.期望</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-感触"><span class="nav-text">3.感触</span></a></li></ol></div>
             
 
           </div>
