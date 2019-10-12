@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[2019-9、10月记]]></title>
+    <url>%2F2019%2F10%2F12%2F2019-9%E3%80%8110%E6%9C%88%E8%AE%B0%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
     <title><![CDATA[Machine Learning-week1]]></title>
     <url>%2F2019%2F10%2F09%2FMachine-Learning-week1%2F</url>
-    <content type="text"><![CDATA[吴恩达的Machine Learning课程学习[ 第一周 ]。 0.前言学习网站：https://www.coursera.org/learn/machine-learning/ 1.What is machine learning? 为什么要用机器学习？因为有些问题是不能用直接的编程解决的，如垃圾邮件过滤、网页排序，唯一的解决办法就是让机器自己学习。 机器学习的一个应用领域就是数据挖掘：目前人们已经积累了海量数据，而数据里面必然蕴含着某种模式或规律，如网页点击信息、医疗记录、生物学信息、工程信息等的数据挖掘。 机器学习可以解决显性编程解决不了的问题：如让直升机自主飞行，手写识别，自然语言处理、图像识别。 Arthur Samuel(1959):the field of study that gives computers the ability to learn without being explicitly programmed. Tom Mitchell(1998):A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E. （“如果某计算机程序在T上的性能（由P来衡量）随着经验E的提高而改善，那么说它可以从经验E中学习一些任务T和一些性能指标P。”） 问题1：假设您的电子邮件程序监视您将哪些电子邮件标记为垃圾邮件或不将其标记为垃圾邮件，并以此为基础来学习如何更好地过滤垃圾邮件。 在此设置中任务T是什么？ 答：将电子邮件分类为垃圾邮件或非垃圾邮件。 【此任务中E为：监视您将哪些电子邮件标记为垃圾邮件或不将其标记为垃圾邮件。 此任务中P为：正确分类为垃圾邮件/非垃圾邮件的电子邮件数量（或分数）。】 2.有监督式学习和无监督式学习机器学习的算法大致可以分为有监督学习（Supervised Learning)和无监督学习（Unsupervised Learning）两种]]></content>
+    <content type="text"><![CDATA[吴恩达的Machine Learning课程学习[ 第一周 ]。 &lt;未完&gt; 0.前言学习网站：https://www.coursera.org/learn/machine-learning/ 1.What is machine learning? 为什么要用机器学习？因为有些问题是不能用直接的编程解决的，如垃圾邮件过滤、网页排序，唯一的解决办法就是让机器自己学习。 机器学习的一个应用领域就是数据挖掘：目前人们已经积累了海量数据，而数据里面必然蕴含着某种模式或规律，如网页点击信息、医疗记录、生物学信息、工程信息等的数据挖掘。 机器学习可以解决显性编程解决不了的问题：如让直升机自主飞行，手写识别，自然语言处理、图像识别。 Arthur Samuel(1959):the field of study that gives computers the ability to learn without being explicitly programmed. Tom Mitchell(1998):A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E. （“如果某计算机程序在T上的性能（由P来衡量）随着经验E的提高而改善，那么说它可以从经验E中学习一些任务T和一些性能指标P。”） 问题1：假设您的电子邮件程序监视您将哪些电子邮件标记为垃圾邮件或不将其标记为垃圾邮件，并以此为基础来学习如何更好地过滤垃圾邮件。 在此设置中任务T是什么？ 答：将电子邮件分类为垃圾邮件或非垃圾邮件。 【此任务中E为：监视您将哪些电子邮件标记为垃圾邮件或不将其标记为垃圾邮件。 此任务中P为：正确分类为垃圾邮件/非垃圾邮件的电子邮件数量（或分数）。】 2.有监督式学习和无监督式学习机器学习的算法大致可以分为有监督学习（Supervised Learning)和无监督学习（Unsupervised Learning）两种]]></content>
       <categories>
         <category>机器学习</category>
       </categories>
