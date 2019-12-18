@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="编码,Matlab,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="信息论实验课上的作业，其中包括【香农编码、哈弗曼编码、算术编码和费诺编码】虽然有很大一部分都是网上借鉴别人的，但是自己琢磨了几次也算是看懂了原理，动手写了一些自己理解的东西，索性就记录一下。">
+<meta name="keywords" content="编码,Matlab">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息论编码实验总结">
+<meta property="og:url" content="https://fangmuheng.github.io/2019/12/18/信息论编码实验总结/index.html">
+<meta property="og:site_name" content="方慕珩">
+<meta property="og:description" content="信息论实验课上的作业，其中包括【香农编码、哈弗曼编码、算术编码和费诺编码】虽然有很大一部分都是网上借鉴别人的，但是自己琢磨了几次也算是看懂了原理，动手写了一些自己理解的东西，索性就记录一下。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-12-18T13:14:50.455Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="信息论编码实验总结">
+<meta name="twitter:description" content="信息论实验课上的作业，其中包括【香农编码、哈弗曼编码、算术编码和费诺编码】虽然有很大一部分都是网上借鉴别人的，但是自己琢磨了几次也算是看懂了原理，动手写了一些自己理解的东西，索性就记录一下。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://fangmuheng.github.io/2019/12/18/信息论编码实验总结/">
+
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "56fbfd12"
+    });
+  daovoice('update');
+  </script>
+
+  <title>信息论编码实验总结 | 方慕珩</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">方慕珩</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">凛冬散尽，星河长明。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fangmuheng.github.io/2019/12/18/信息论编码实验总结/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fangmuheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="方慕珩">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">信息论编码实验总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-18T20:56:25+08:00">
+                2019-12-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/12/18/信息论编码实验总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/12/18/信息论编码实验总结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.3k字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>信息论实验课上的作业，其中包括【香农编码、哈弗曼编码、算术编码和费诺编码】虽然有很大一部分都是网上借鉴别人的，但是自己琢磨了几次也算是看懂了原理，动手写了一些自己理解的东西，索性就记录一下。</p>
+<a id="more"></a>
+<h4 id="1-香农编码"><a href="#1-香农编码" class="headerlink" title="1.香农编码"></a>1.香农编码</h4><p>编码步骤：</p>
+<p>将信源发出的q个消息符号按其概率大小的次序排列；</p>
+<p>计算出各个符号的累加概率。</p>
+<p>按下式计算第i个消息对应的码字长度。</p>
+<p>将累加概率（十进制小数）变换成二进制小数，根据码长Li取小数点后Li个二进制符号作为第i个消息的码字。</p>
+<p>代码：</p>
+<p>【shannon.m】</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%香农编码</span></span><br><span class="line"><span class="comment">%input：信源分布p</span></span><br><span class="line"><span class="comment">%output:二进制编码code</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shannon</span><span class="params">(p)</span></span></span><br><span class="line">n = <span class="built_in">length</span>(p);<span class="comment">%信源符号数</span></span><br><span class="line">p = <span class="built_in">sort</span>(p,<span class="string">'descend'</span>);<span class="comment">%降序排列</span></span><br><span class="line">F = <span class="built_in">zeros</span>(<span class="number">1</span>,n);<span class="comment">%累加概率序列</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">2</span>:n</span><br><span class="line">    F(<span class="built_in">i</span>)=F(<span class="built_in">i</span><span class="number">-1</span>)+p(<span class="built_in">i</span><span class="number">-1</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">l = <span class="built_in">zeros</span>(<span class="number">1</span>,n);<span class="comment">%码长序列</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:n</span><br><span class="line">    l(<span class="built_in">i</span>)=<span class="built_in">ceil</span>(-<span class="built_in">log2</span>(p(<span class="built_in">i</span>)));<span class="comment">%向上取整</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">disp</span>(<span class="string">'最终编码结果：'</span>);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:n</span><br><span class="line">    f = <span class="built_in">max</span>(l(<span class="built_in">i</span>));</span><br><span class="line">    w=trans(F(<span class="built_in">i</span>),f); <span class="comment">%调用二进制转换编码函数</span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:l(<span class="built_in">i</span>) <span class="comment">%这个循环是指取前多少个作为码字</span></span><br><span class="line">        code(<span class="built_in">j</span>)=w(<span class="built_in">j</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="built_in">disp</span>([num2str(p(<span class="built_in">i</span>)),<span class="string">'-&gt;'</span>,num2str(code)]); <span class="comment">%这句是作为输出语句</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>【trans.m】</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%十进制转换为二进制，应用于香农编码</span></span><br><span class="line"><span class="comment">%原理：乘二取整</span></span><br><span class="line"><span class="comment">%输入：需要编码的概率F，f为码长</span></span><br><span class="line"><span class="comment">%输出：编码后的码字</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">w</span> = <span class="title">trans</span><span class="params">( F,f )</span></span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:f</span><br><span class="line">    temp=F.*<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(temp&lt;<span class="number">1</span>)</span><br><span class="line">        w(<span class="built_in">i</span>)=<span class="number">0</span>;</span><br><span class="line">        F=temp;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        F=temp<span class="number">-1</span>;</span><br><span class="line">        w(<span class="built_in">i</span>)=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; p=[0.20 0.19 0.18 0.17 0.15 0.10 0.01]</span><br><span class="line"></span><br><span class="line">p =</span><br><span class="line"></span><br><span class="line">    0.2000    0.1900    0.1800    0.1700    0.1500    0.1000    0.0100</span><br><span class="line"></span><br><span class="line">&gt;&gt; shannon(p)</span><br><span class="line">最终编码结果：</span><br><span class="line">0.2-&gt;0  0  0</span><br><span class="line">0.19-&gt;0  0  1</span><br><span class="line">0.18-&gt;0  1  1</span><br><span class="line">0.17-&gt;1  0  0</span><br><span class="line">0.15-&gt;1  0  1</span><br><span class="line">0.1-&gt;1  1  1  0</span><br><span class="line">0.01-&gt;1  1  1  1  1  1  0</span><br></pre></td></tr></table></figure>
+<h4 id="2-哈弗曼编码（二元）"><a href="#2-哈弗曼编码（二元）" class="headerlink" title="2.哈弗曼编码（二元）"></a>2.哈弗曼编码（二元）</h4><p>代码：</p>
+<p>【myHuffman.m】</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line">clc;</span><br><span class="line">clear;</span><br><span class="line"><span class="comment">%输入格式：[p1 p2 p3 … pn]</span></span><br><span class="line"><span class="comment">%A = [0.1 0.18 0.4 0.05 0.06 0.1 0.07 0.04];    </span></span><br><span class="line"></span><br><span class="line">A = input(<span class="string">'输入信源概率分布：\n'</span>)</span><br><span class="line">n = <span class="built_in">length</span>(A);</span><br><span class="line"><span class="comment">%----先判断输入格式是否正确</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:n</span><br><span class="line">    <span class="keyword">if</span> A(<span class="built_in">i</span>)&lt;<span class="number">0</span></span><br><span class="line">    fprintf(<span class="string">'概率小于0，请重新输入。\n'</span>);</span><br><span class="line">    A = input(<span class="string">'输入信源概率分布：\n'</span>)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">A = <span class="built_in">sort</span>(A,<span class="string">'descend'</span>);  <span class="comment">%降序排列        </span></span><br><span class="line">T = A;<span class="comment">%设置一个当前编码序列</span></span><br><span class="line">[m,n] = <span class="built_in">size</span>(A);<span class="comment">%行列数</span></span><br><span class="line">B=<span class="built_in">zeros</span>(n,n<span class="number">-1</span>);<span class="comment">%生成一个空的编码表</span></span><br><span class="line"><span class="comment">%-----编码表的第一列</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:n</span><br><span class="line">    B(<span class="built_in">i</span>,<span class="number">1</span>)=T(<span class="built_in">i</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">sum=B(<span class="built_in">i</span>,<span class="number">1</span>)+B(<span class="built_in">i</span><span class="number">-1</span>,<span class="number">1</span>);<span class="comment">%最后两个概率相加</span></span><br><span class="line">T(n<span class="number">-1</span>)=sum;</span><br><span class="line">T(n)=<span class="number">0</span>;<span class="comment">%把刚所求最后两个数之和放进当前编码序列，最后一个设置为0</span></span><br><span class="line">T = <span class="built_in">sort</span>(T,<span class="string">'descend'</span>);<span class="comment">%然后重新进行排序</span></span><br><span class="line">t = n<span class="number">-1</span>;<span class="comment">%当前序列数目</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%-----编码表的其他列</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">2</span>:n<span class="number">-1</span> <span class="comment">%从第二列开始</span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:t</span><br><span class="line">        B(<span class="built_in">i</span>,<span class="built_in">j</span>)=T(<span class="built_in">i</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">        K=<span class="built_in">find</span>(T==sum);  <span class="comment">%找到当前序列中sum的位置，记在K中</span></span><br><span class="line">        B(n,<span class="built_in">j</span>)=K(<span class="keyword">end</span>);<span class="comment">%从第二列开始，编码表中的最后一位元素是sum在当前序列中的位置</span></span><br><span class="line">        sum=(B(t<span class="number">-1</span>,<span class="built_in">j</span>)+B(t,<span class="built_in">j</span>));<span class="comment">%继续把最后两个元素相加记为sum</span></span><br><span class="line">        T(t<span class="number">-1</span>)=sum;</span><br><span class="line">        T(t)=<span class="number">0</span>;<span class="comment">%把刚所求最后两个数之和放进当前编码序列，最后一个设置为0</span></span><br><span class="line">        T = <span class="built_in">sort</span>(T,<span class="string">'descend'</span>); <span class="comment">%然后重新进行排序</span></span><br><span class="line">        t=t<span class="number">-1</span>;<span class="comment">%当前序列数目</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%编码表</span></span><br><span class="line"><span class="built_in">disp</span>(<span class="string">'编码表为：'</span>)</span><br><span class="line">B</span><br><span class="line"><span class="comment">%-----开始编码</span></span><br><span class="line"><span class="comment">%先设置最后一列的两个元素编码为0和1</span></span><br><span class="line"><span class="comment">%这里写下划线是因为matlab会显示不出来0，所以只能加上下划线让它显示出来</span></span><br><span class="line"><span class="comment">%因为有下划线，所以后面计算码长的时候会除2</span></span><br><span class="line">END1=sym(<span class="string">'[_0,_1]'</span>); </span><br><span class="line">END=END1;</span><br><span class="line">t=<span class="number">3</span>;     </span><br><span class="line">d=<span class="number">1</span>;          </span><br><span class="line"><span class="keyword">for</span> <span class="built_in">j</span>=n<span class="number">-2</span>:<span class="number">-1</span>:<span class="number">1</span>      <span class="comment">%从倒数第二列开始依次对各列元素编码</span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:t<span class="number">-2</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">i</span>&gt;<span class="number">1</span> &amp; B(<span class="built_in">i</span>,<span class="built_in">j</span>)==B(<span class="built_in">i</span><span class="number">-1</span>,<span class="built_in">j</span>)</span><br><span class="line">            d=d+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            d=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">         <span class="comment">%把相加后的那个数设置为-1方便找到</span></span><br><span class="line">        B(B(n,<span class="built_in">j</span>+<span class="number">1</span>),<span class="built_in">j</span>+<span class="number">1</span>)=<span class="number">-1</span>;          </span><br><span class="line">        temp=B(:,<span class="built_in">j</span>+<span class="number">1</span>);                </span><br><span class="line">        x=<span class="built_in">find</span>(temp==B(<span class="built_in">i</span>,<span class="built_in">j</span>)); </span><br><span class="line">        <span class="comment">%给没有变过的值编码</span></span><br><span class="line">        END(<span class="built_in">i</span>)=END1(x(d));            </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    y=B(n,<span class="built_in">j</span>+<span class="number">1</span>);</span><br><span class="line">    <span class="comment">%给变过的值编码，上面的补0，下面的补1</span></span><br><span class="line">    END(t<span class="number">-1</span>)=[char(END1(y)),<span class="string">'_0'</span>];   </span><br><span class="line">    END(t)=[char(END1(y)),<span class="string">'_1'</span>];</span><br><span class="line">    t=t+<span class="number">1</span>;</span><br><span class="line">    END1=END;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%编码结果</span></span><br><span class="line"><span class="built_in">disp</span>(<span class="string">'编码结果为：'</span>)       </span><br><span class="line">END</span><br><span class="line"><span class="comment">%-----计算编码效率p</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:n</span><br><span class="line">    [a,b]=<span class="built_in">size</span>(char(END(<span class="built_in">i</span>)));</span><br><span class="line">    M(<span class="built_in">i</span>)=b/<span class="number">2</span>;    <span class="comment">%这里除以2是因为有下划线占了一半的码字长度</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%计算平均码长</span></span><br><span class="line">L1 = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:n</span><br><span class="line">    L1 = L1 + M(<span class="built_in">i</span>).*A(<span class="built_in">i</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%计算信息熵</span></span><br><span class="line">H1=<span class="built_in">log2</span>(A);</span><br><span class="line">H=-A*(H1');</span><br><span class="line">p=H/L1;</span><br><span class="line"><span class="built_in">disp</span>(<span class="string">'编码效率为：'</span>)</span><br><span class="line">p</span><br></pre></td></tr></table></figure>
+<p>备注：= = 这个有个很大的bug就是0在matlab里居然显示不出来！我也又气又无奈……只能用下划线来让它表示出来了。</p>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">输入信源概率分布：</span><br><span class="line">[1/6 1/4 5/12 1/6]</span><br><span class="line"></span><br><span class="line">A =</span><br><span class="line"></span><br><span class="line">    0.1667    0.2500    0.4167    0.1667</span><br><span class="line"></span><br><span class="line">编码表为：</span><br><span class="line"></span><br><span class="line">B =</span><br><span class="line"></span><br><span class="line">    0.4167    0.4167    0.5833</span><br><span class="line">    0.2500    0.3333    0.4167</span><br><span class="line">    0.1667    0.2500         0</span><br><span class="line">    0.1667    2.0000    1.0000</span><br><span class="line"></span><br><span class="line">编码结果为：</span><br><span class="line"> </span><br><span class="line">END =</span><br><span class="line"> </span><br><span class="line">[ _1, _0_1, _0_0_0, _0_0_1]</span><br><span class="line"> </span><br><span class="line">编码效率为：</span><br><span class="line"></span><br><span class="line">p =</span><br><span class="line"></span><br><span class="line">0.9850</span><br></pre></td></tr></table></figure>
+<h4 id="3-算术编码"><a href="#3-算术编码" class="headerlink" title="3.算术编码"></a>3.算术编码</h4><p>备注：哈哈哈哈这个是我自己写的！！（= = 虽然很简单但本菜鸟还是有自豪感的……）</p>
+<p>代码：</p>
+<p>【suanshu.m】</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%算术编码程序</span></span><br><span class="line"><span class="comment">%输入：信源u、信源分布p、需要进行编码的序列s</span></span><br><span class="line"><span class="comment">%输入备注：输入格式：a=[0 1]  p = [1/4 3/4] s = [1 0 1 1 1]</span></span><br><span class="line"><span class="comment">%输出：该序列的算术编码S</span></span><br><span class="line"><span class="comment">%输出备注：以序列所在区间的左端点值作为所求序列的码字</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%输入备注：如果信源符号是字符型，输入方式为：a = 'ab';  s = 'bbbababb';</span></span><br><span class="line"><span class="comment">%其实符号是数字可以写成数组也可以写成字符类型，matlab都支持运算，如：a = '01' s = '1101'</span></span><br><span class="line"><span class="comment">%序列比较长的时候写成字符类型比较方便</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[S]</span> = <span class="title">suanshu</span><span class="params">(a,p,s)</span></span></span><br><span class="line"><span class="comment">%设置初始值,序列为空，左端点为0，右端点为1，长度为1</span></span><br><span class="line">Slow(<span class="number">1</span>)=<span class="number">0</span>;</span><br><span class="line">Shigh(<span class="number">1</span>)=<span class="number">1</span>;</span><br><span class="line">range=Shigh(<span class="number">1</span>)-Slow(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">%计算信源符号的数目和所需要编码的序列长度</span></span><br><span class="line">n = <span class="built_in">length</span>(a);</span><br><span class="line">m = <span class="built_in">length</span>(s);</span><br><span class="line"></span><br><span class="line"><span class="comment">%计算信源a中每个元素对应的左右端点low high</span></span><br><span class="line">low(<span class="number">1</span>) = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:n</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">i</span> == <span class="number">1</span></span><br><span class="line">        high(<span class="built_in">i</span>) = p(<span class="built_in">i</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        low(<span class="built_in">i</span>) = p(<span class="built_in">i</span><span class="number">-1</span>) + low(<span class="built_in">i</span><span class="number">-1</span>);</span><br><span class="line">        high(<span class="built_in">i</span>) = low(<span class="built_in">i</span>) + p(<span class="built_in">i</span>);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%开始遍历所要编码序列中的每个元素</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:m</span><br><span class="line">    <span class="comment">%寻找与当前元素相等的信源符号，把索引放入num中</span></span><br><span class="line">    num = <span class="built_in">find</span>(a==s(<span class="built_in">i</span>));</span><br><span class="line">    <span class="comment">%开始计算添加新符号后的序列左右端点newSlow和newShigh</span></span><br><span class="line">    Slow(<span class="built_in">i</span>+<span class="number">1</span>) = Slow(<span class="built_in">i</span>) + range*low(num);</span><br><span class="line">    Shigh(<span class="built_in">i</span>+<span class="number">1</span>) = Slow(<span class="built_in">i</span>) + range*high(num);</span><br><span class="line">    range = Shigh(<span class="built_in">i</span>+<span class="number">1</span>) - Slow(<span class="built_in">i</span>+<span class="number">1</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%最后以序列所在区间的左端点值作为所求序列的码字</span></span><br><span class="line"><span class="comment">%即输出最后计算得到的Slow(m+1)</span></span><br><span class="line">S = Slow(m+<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; a = <span class="string">'01'</span></span><br><span class="line"></span><br><span class="line">a =</span><br><span class="line"></span><br><span class="line"><span class="number">01</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; p = [<span class="number">1</span>/<span class="number">8</span> <span class="number">7</span>/<span class="number">8</span>]</span><br><span class="line"></span><br><span class="line">p =</span><br><span class="line"></span><br><span class="line">    <span class="number">0.1250</span>    <span class="number">0.8750</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; s = <span class="string">'11111110111110'</span></span><br><span class="line"></span><br><span class="line">s =</span><br><span class="line"></span><br><span class="line"><span class="number">11111110111110</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; suanshu(a,p,s)</span><br><span class="line"></span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line"></span><br><span class="line">    <span class="number">0.6312</span></span><br></pre></td></tr></table></figure>
+<h4 id="4-费诺编码"><a href="#4-费诺编码" class="headerlink" title="4.费诺编码"></a>4.费诺编码</h4><p>备注：这个是朋友给我的= =，只看懂了一点，至于各种递归调用我已经晕了……</p>
+<p>代码：</p>
+<p>【f1.m】</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">x</span>=<span class="title">f1</span><span class="params">(i,j,p,r)</span></span></span><br><span class="line"><span class="keyword">global</span> x;</span><br><span class="line">x=char(x);</span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">j</span>&lt;=<span class="built_in">i</span>)</span><br><span class="line">   <span class="keyword">return</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    q=<span class="number">0</span>;</span><br><span class="line"><span class="comment">%求累加概率</span></span><br><span class="line"><span class="keyword">for</span> t=<span class="built_in">i</span>:<span class="built_in">j</span> </span><br><span class="line">    q=p(t)+q;y(t)=q; </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%累加概率值与该总概率值减该累加概率值之差取绝对值</span></span><br><span class="line"><span class="keyword">for</span> t=<span class="built_in">i</span>:<span class="built_in">j</span></span><br><span class="line">v(t)=<span class="built_in">abs</span>(y(t)-(q-y(t))); </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%取最小的一个值作为分界点</span></span><br><span class="line"><span class="keyword">for</span> t=<span class="built_in">i</span>:<span class="built_in">j</span></span><br><span class="line">    <span class="keyword">if</span>(v(t)==<span class="built_in">min</span>(v)) </span><br><span class="line">        <span class="comment">%赋值</span></span><br><span class="line">   <span class="keyword">for</span> k=<span class="built_in">i</span>:t </span><br><span class="line">        x(k,r)=<span class="string">'0'</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">for</span> k=(t+<span class="number">1</span>):<span class="built_in">j</span></span><br><span class="line">        x(k,r)=<span class="string">'1'</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    d=t;</span><br><span class="line">    <span class="comment">%递归</span></span><br><span class="line">    f1(<span class="built_in">i</span>,d,p,r+<span class="number">1</span>);</span><br><span class="line">    f2(d+<span class="number">1</span>,<span class="built_in">j</span>,p,r+<span class="number">1</span>);</span><br><span class="line">    f1(d+<span class="number">1</span>,<span class="built_in">j</span>,p,r+<span class="number">1</span>);</span><br><span class="line">    f2(<span class="built_in">i</span>,d,p,r+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span> </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
+<p>【f2.m】</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">x</span>=<span class="title">f2</span><span class="params">(i,j,p,r)</span></span></span><br><span class="line"><span class="keyword">global</span> x;</span><br><span class="line">x=char(x);</span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">j</span>&lt;=<span class="built_in">i</span>)</span><br><span class="line">   <span class="keyword">return</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">   q=<span class="number">0</span>;</span><br><span class="line">   <span class="comment">%求累加概率值</span></span><br><span class="line"><span class="keyword">for</span> t=<span class="built_in">i</span>:<span class="built_in">j</span> </span><br><span class="line">    q=p(t)+q;y(t-<span class="built_in">i</span>+<span class="number">1</span>)=q; </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%%累加概率值与该总概率值减该累加概率值之差取绝对值</span></span><br><span class="line"><span class="keyword">for</span> t=<span class="number">1</span>:<span class="built_in">j</span>-(<span class="built_in">i</span><span class="number">-1</span>)</span><br><span class="line">v(t)=<span class="built_in">abs</span>(y(t)-(q-y(t))); </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%取最小的一个值作为分界点</span></span><br><span class="line"><span class="keyword">for</span> t=<span class="number">1</span>:<span class="built_in">j</span>-(<span class="built_in">i</span><span class="number">-1</span>)</span><br><span class="line">    <span class="keyword">if</span>(v(t)==<span class="built_in">min</span>(v)) </span><br><span class="line">        d=t+<span class="built_in">i</span><span class="number">-1</span>;</span><br><span class="line">        <span class="comment">%赋值</span></span><br><span class="line">    <span class="keyword">for</span> k=<span class="built_in">i</span>:d   </span><br><span class="line">        x(k,r)=<span class="string">'0'</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">for</span> k=(d+<span class="number">1</span>):<span class="built_in">j</span></span><br><span class="line">        x(k,r)=<span class="string">'1'</span>;</span><br><span class="line">    <span class="keyword">end</span> </span><br><span class="line">    <span class="comment">%递归</span></span><br><span class="line">   f2(d+<span class="number">1</span>,<span class="built_in">j</span>,p,r+<span class="number">1</span>);</span><br><span class="line">   f1(<span class="built_in">i</span>,d,p,r+<span class="number">1</span>);</span><br><span class="line">   f2(<span class="built_in">i</span>,d,p,r+<span class="number">1</span>);</span><br><span class="line">   f1(d+<span class="number">1</span>,<span class="built_in">j</span>,p,r+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span> </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
+<p>【myfano.m】</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">fprintf(<span class="string">'请输入信源概率'</span>);</span><br><span class="line">p=input(<span class="string">'p='</span>);</span><br><span class="line">N = <span class="built_in">length</span>(p);</span><br><span class="line">s=<span class="number">0</span>;l=<span class="number">0</span>;H=<span class="number">0</span>;</span><br><span class="line"><span class="comment">%计算信息熵</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:N</span><br><span class="line">    H=H+(- p(<span class="built_in">i</span>)*<span class="built_in">log2</span>(p(<span class="built_in">i</span>)));</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">tic;</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:N<span class="number">-1</span> <span class="comment">%按概率分布大小对信源排序</span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="built_in">i</span>+<span class="number">1</span>:N</span><br><span class="line">        <span class="keyword">if</span> p(<span class="built_in">i</span>)&lt;p(<span class="built_in">j</span>)</span><br><span class="line">           m=p(<span class="built_in">j</span>);p(<span class="built_in">j</span>)=p(<span class="built_in">i</span>);p(<span class="built_in">i</span>)=m;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">x=f1(<span class="number">1</span>,N,p,<span class="number">1</span>);</span><br><span class="line"><span class="comment">%计算平均码长</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:N  </span><br><span class="line">    L(<span class="built_in">i</span>)=<span class="built_in">length</span>(<span class="built_in">find</span>(x(<span class="built_in">i</span>,:)));</span><br><span class="line">    l=l+p(<span class="built_in">i</span>)*L(<span class="built_in">i</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%编码效率</span></span><br><span class="line">n=H/l; </span><br><span class="line">fprintf(<span class="string">'编码效率:'</span>);<span class="built_in">disp</span>(n) </span><br><span class="line">fprintf(<span class="string">'编码结果:\n'</span>);</span><br><span class="line"><span class="built_in">disp</span>(x) </span><br><span class="line">fprintf(<span class="string">'平均码长:K='</span>);<span class="built_in">disp</span>(l)</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; myfano</span><br><span class="line">请输入信源概率p=[0.2 0.19 0.18 0.17 0.15 0.1 0.01]</span><br><span class="line">编码效率:    0.9521</span><br><span class="line"></span><br><span class="line">编码结果:</span><br><span class="line">00  </span><br><span class="line">010 </span><br><span class="line">011 </span><br><span class="line">10  </span><br><span class="line">110 </span><br><span class="line">1110</span><br><span class="line">1111</span><br><span class="line">平均码长:K=    2.7400</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/编码/" rel="tag"><i class="fa fa-tag"></i> 编码</a>
+          
+            <a href="/tags/Matlab/" rel="tag"><i class="fa fa-tag"></i> Matlab</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/21/java笔记-异常/" rel="next" title="java笔记-异常">
+                <i class="fa fa-chevron-left"></i> java笔记-异常
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="Fangmuheng">
+            
+              <p class="site-author-name" itemprop="name">Fangmuheng</p>
+              <p class="site-description motion-element" itemprop="description">What could be more exciting than proving yourself?</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Fangmuheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:anyapei@foxmall.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="110" src="//music.163.com/outchain/player?type=0&id=2651488515&auto=0&height=66"></iframe>
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-香农编码"><span class="nav-text">1.香农编码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-哈弗曼编码（二元）"><span class="nav-text">2.哈弗曼编码（二元）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-算术编码"><span class="nav-text">3.算术编码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-费诺编码"><span class="nav-text">4.费诺编码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Fangmuheng</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">51k</span>
+  
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: true,
+        appId: '3RO7uNsUa0mDFJeViDvb9hiv-gzGzoHsz',
+        appKey: 'vAOgCiCTzJqAcXPOCXMLwlSP',
+        placeholder: '_(:з」∠)_有什么话想要对我说吗？',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+</body>
+</html>
