@@ -200,8 +200,9 @@
 <p>其中包括：线性变换、分段线性变换、非线性灰度变换。</p>
 <h5 id="（1）线性变换"><a href="#（1）线性变换" class="headerlink" title="（1）线性变换"></a>（1）线性变换</h5><p>图像的灰度集中在较亮的区域而导致图像偏亮，这个时候可以对图像的每一个像素灰度作线性拉伸。</p>
 <p>原图像f(i,j)的灰度范围为[a,b]，线性变换后图像g(i,j)的范围为[a1,b1]</p>
-<p>关系式为：<br>$$<br>g(i,j) = a1+\frac{b1-a1}{b-a}[f(i,j)-a]<br>$$</p>
-<pre><code class="hljs MATLAB">A = imread(<span class="hljs-string">'412.jpg'</span>);
+<p>关系式为： </p>
+<script type="math/tex; mode=display">
+g(i,j) = a1+\frac{b1-a1}{b-a}[f(i,j)-a]</script><pre><code class="hljs MATLAB">A = imread(<span class="hljs-string">'412.jpg'</span>);
 A1 = rgb2gray(A);<span class="hljs-comment">%彩色图像转为灰度图像</span>
 a1 = <span class="hljs-number">0</span>;
 b1 = <span class="hljs-number">255</span>;<span class="hljs-comment">%线性变换后的范围</span>
@@ -213,8 +214,9 @@ A2 = a1+(b1-a1)/(b-a)*(A1-a);
 subplot(<span class="hljs-number">122</span>),imshow(A2);</code></pre>
 <p><img src="https://img-blog.csdnimg.cn/20200412173842144.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjcyNTMy,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="avatar"></p>
 <h5 id="（2）分段线性变换"><a href="#（2）分段线性变换" class="headerlink" title="（2）分段线性变换"></a>（2）分段线性变换</h5><p>为了突出感兴趣的目标，抑制不感兴趣的目标，可以采用分段线性变换。</p>
-<p>公式：<br>$$<br>g(i,j) = \left{\begin{matrix} (\frac{c}{a})f(i,j) &amp; 0\leq f(i,j)\leq a\ (d-c)/(b-a)[f(i,j)-a]+c &amp; a\leq f(i,j)&lt; b\ [(M-d)/(M-b)][f(i,j)-b]+d &amp; b \leq f(i,j)&lt; M \end{matrix}\right.<br>$$</p>
-<pre><code class="hljs matlab">A = imread(<span class="hljs-string">'412.jpg'</span>);
+<p>公式：</p>
+<script type="math/tex; mode=display">
+g(i,j) = \left\{\begin{matrix} (\frac{c}{a})f(i,j) & 0\leq f(i,j)\leq a\\ (d-c)/(b-a)[f(i,j)-a]+c & a\leq f(i,j)< b\\ [(M-d)/(M-b)][f(i,j)-b]+d & b \leq f(i,j)< M \end{matrix}\right.</script><pre><code class="hljs matlab">A = imread(<span class="hljs-string">'412.jpg'</span>);
 A1 = im2double(rgb2gray(A));<span class="hljs-comment">%彩色图像转为灰度图像</span>
 [h,w] = <span class="hljs-built_in">size</span>(A1);
 A2 = <span class="hljs-built_in">zeros</span>(h,w);
@@ -238,8 +240,9 @@ subplot(<span class="hljs-number">122</span>),imshow(A2),title(<span class="hljs
 <p><img src="https://img-blog.csdnimg.cn/2020041218220220.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjcyNTMy,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="avatar"></p>
 <h5 id="（3）非线性灰度变换"><a href="#（3）非线性灰度变换" class="headerlink" title="（3）非线性灰度变换"></a>（3）非线性灰度变换</h5><p>某些非线性函数：对数函数、指数函数等作为映射函数的时候，可实现非线性变换。</p>
 <p><strong>1.对数变换</strong></p>
-<p>对低灰度区进行拉伸，对高灰度区进行压缩。<br>$$<br>g(i,j) = a+\frac{ln[f(i,j)+1]}{b·lnc}<br>$$</p>
-<pre><code class="hljs matlab">A = imread(<span class="hljs-string">'412.jpg'</span>);
+<p>对低灰度区进行拉伸，对高灰度区进行压缩。</p>
+<script type="math/tex; mode=display">
+g(i,j) = a+\frac{ln[f(i,j)+1]}{b·lnc}</script><pre><code class="hljs matlab">A = imread(<span class="hljs-string">'412.jpg'</span>);
 A1 = im2double(rgb2gray(A));<span class="hljs-comment">%彩色图像转为灰度图像</span>
 subplot(<span class="hljs-number">221</span>),imhist(A1)<span class="hljs-comment">%查看灰度直方图</span>
 subplot(<span class="hljs-number">222</span>),imshow(A1);
@@ -248,8 +251,9 @@ subplot(<span class="hljs-number">223</span>),imhist(A2)
 subplot(<span class="hljs-number">224</span>),imshow(A2);</code></pre>
 <p><img src="https://img-blog.csdnimg.cn/20200412184017156.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjcyNTMy,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="avatar"></p>
 <p><strong>2.指数变换</strong></p>
-<p>对高灰度区拉伸。<br>$$<br>g(i,j) = b^{c[f(i,j)-a]}-1<br>$$</p>
-<pre><code class="hljs matlab">A = imread(<span class="hljs-string">'412.jpg'</span>);
+<p>对高灰度区拉伸。</p>
+<script type="math/tex; mode=display">
+g(i,j) = b^{c[f(i,j)-a]}-1</script><pre><code class="hljs matlab">A = imread(<span class="hljs-string">'412.jpg'</span>);
 A = rgb2gray(A);
 A1 = double(A);
 A2 = <span class="hljs-number">1.5</span>.^(A1*<span class="hljs-number">0.070</span>)<span class="hljs-number">-1</span>;
@@ -267,7 +271,9 @@ subplot(<span class="hljs-number">224</span>),imshow(A2);</code></pre>
 <h4 id="2-直方图修正法"><a href="#2-直方图修正法" class="headerlink" title="2.直方图修正法"></a>2.直方图修正法</h4><p>一般的图像灰度分布集中在较窄的区间，导致图像细节不清晰，使用直方图修正法可以让图像的灰度间距拉开或者让灰度分布均匀而增大反差，使得图像细节清晰。</p>
 <p>直方图修正法包括：直方图均衡化和直方图规定化。</p>
 <h5 id="（1）直方图均衡化"><a href="#（1）直方图均衡化" class="headerlink" title="（1）直方图均衡化"></a>（1）直方图均衡化</h5><p>直方图均衡化是将原图像的直方图通过变换函数修正为均匀的直方图，然后按均衡直方图修改原图像。</p>
-<p>变换函数：（离散）<br>$$<br>Sk = T(Rk) = \sum \frac{nj}{n}<br>$$<br>MATLAB里刚好有histeq()函数可以用于均衡化。</p>
+<p>变换函数：（离散）</p>
+<script type="math/tex; mode=display">
+Sk = T(Rk) = \sum \frac{nj}{n}</script><p>MATLAB里刚好有histeq()函数可以用于均衡化。</p>
 <p>其中：histeq()有两个参数，第一个参数为要处理的图像，第二个参数为处理后的灰度级个数。</p>
 <pre><code class="hljs matlab">A = imread(<span class="hljs-string">'412.jpg'</span>);
 A1 = rgb2gray(A);
@@ -595,6 +601,45 @@ subplot(<span class="hljs-number">224</span>),imshow(A2);</code></pre>
 
 
 
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js"></script>
+
+  
 
 
 
