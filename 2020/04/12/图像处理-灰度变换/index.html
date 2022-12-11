@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="What could be more exciting than proving yourself?">
+  <meta name="author" content="Fangmuheng">
+  <meta name="keywords" content="Blog">
+  <title>图像处理-灰度变换 - 方慕珩</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/github-gist.min.css">
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>方慕珩</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/links/">
+              <i class="iconfont icon-link-fill"></i>
+              友链</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/1.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2020-04-12 20:27">
+                    星期日, 四月 12日 2020, 8:27 晚上
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    1.2k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    15
+                     分钟
+                  </span>
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  <span id="busuanzi_container_page_pv" class="post-meta" style="display: none">
+                    <i class="iconfont icon-eye" aria-hidden="true"></i>
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>数图实验作业。</p>
+<a id="more"></a>
+<h3 id="图像增强"><a href="#图像增强" class="headerlink" title="图像增强"></a>图像增强</h3><p>图像增强的目的：（1）利用一系列技术改善图像的视觉效果，提高图像清晰度。（2）将图像转换为一种更适合人或机器进行分析处理的形式，抑制无用信息，提高图像使用价值。</p>
+<p>图像增强从作用域划分为：空间域增强、频率域增强、彩色增强。</p>
+<p>其中，空间域增强是直接对图像像素灰度进行操作。包括：点运算和局部运算。</p>
+<p>频率域是经过傅里叶变换后对图像频谱进行操作，最后进行逆变换得到结果。</p>
+<p>点运算包括：灰度变换、直方图修正法和局部统计法。</p>
+<h4 id="1-灰度变换"><a href="#1-灰度变换" class="headerlink" title="1.灰度变换"></a>1.灰度变换</h4><p>灰度变换使得图像的动态范围增大，增强对比度，让图像变得更清晰，特征更明显。</p>
+<p>其中包括：线性变换、分段线性变换、非线性灰度变换。</p>
+<h5 id="（1）线性变换"><a href="#（1）线性变换" class="headerlink" title="（1）线性变换"></a>（1）线性变换</h5><p>图像的灰度集中在较亮的区域而导致图像偏亮，这个时候可以对图像的每一个像素灰度作线性拉伸。</p>
+<p>原图像f(i,j)的灰度范围为[a,b]，线性变换后图像g(i,j)的范围为[a1,b1]</p>
+<p>关系式为： </p>
+<script type="math/tex; mode=display">
+g(i,j) = a1+\frac{b1-a1}{b-a}[f(i,j)-a]</script><pre><code class="hljs MATLAB">A = imread(<span class="hljs-string">'412.jpg'</span>);
+A1 = rgb2gray(A);<span class="hljs-comment">%彩色图像转为灰度图像</span>
+a1 = <span class="hljs-number">0</span>;
+b1 = <span class="hljs-number">255</span>;<span class="hljs-comment">%线性变换后的范围</span>
+<span class="hljs-comment">%imhist(A1)%查看灰度直方图</span>
+subplot(<span class="hljs-number">121</span>),imshow(A1);
+a = <span class="hljs-number">50</span>;
+b = <span class="hljs-number">250</span>;<span class="hljs-comment">%原图像范围</span>
+A2 = a1+(b1-a1)/(b-a)*(A1-a);
+subplot(<span class="hljs-number">122</span>),imshow(A2);</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/20200412173842144.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjcyNTMy,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="avatar"></p>
+<h5 id="（2）分段线性变换"><a href="#（2）分段线性变换" class="headerlink" title="（2）分段线性变换"></a>（2）分段线性变换</h5><p>为了突出感兴趣的目标，抑制不感兴趣的目标，可以采用分段线性变换。</p>
+<p>公式：</p>
+<script type="math/tex; mode=display">
+g(i,j) = \left\{\begin{matrix} (\frac{c}{a})f(i,j) & 0\leq f(i,j)\leq a\\ (d-c)/(b-a)[f(i,j)-a]+c & a\leq f(i,j)< b\\ [(M-d)/(M-b)][f(i,j)-b]+d & b \leq f(i,j)< M \end{matrix}\right.</script><pre><code class="hljs matlab">A = imread(<span class="hljs-string">'412.jpg'</span>);
+A1 = im2double(rgb2gray(A));<span class="hljs-comment">%彩色图像转为灰度图像</span>
+[h,w] = <span class="hljs-built_in">size</span>(A1);
+A2 = <span class="hljs-built_in">zeros</span>(h,w);
+a = <span class="hljs-number">0.2</span>;
+b = <span class="hljs-number">0.8</span>;
+c = <span class="hljs-number">0.1</span>;
+d = <span class="hljs-number">0.9</span>;
+<span class="hljs-keyword">for</span> <span class="hljs-built_in">i</span> = <span class="hljs-number">1</span>:h
+    <span class="hljs-keyword">for</span> <span class="hljs-built_in">j</span> = <span class="hljs-number">1</span>:w
+        <span class="hljs-keyword">if</span> A1(<span class="hljs-built_in">i</span>,<span class="hljs-built_in">j</span>)&lt;=a
+            A2(<span class="hljs-built_in">i</span>,<span class="hljs-built_in">j</span>) = (c/a) * A1(<span class="hljs-built_in">i</span>,<span class="hljs-built_in">j</span>);
+        <span class="hljs-keyword">elseif</span> A1(<span class="hljs-built_in">i</span>,<span class="hljs-built_in">j</span>)&lt;b
+            A2(<span class="hljs-built_in">i</span>,<span class="hljs-built_in">j</span>) = (d-c)/(b-a)*(A1(<span class="hljs-built_in">i</span>,<span class="hljs-built_in">j</span>) - a) + c;
+        <span class="hljs-keyword">else</span> 
+            A2(<span class="hljs-built_in">i</span>,<span class="hljs-built_in">j</span>) = (<span class="hljs-number">1</span>-d)/(<span class="hljs-number">1</span>-b)*(A1(<span class="hljs-built_in">i</span>,<span class="hljs-built_in">j</span>) - b) + d;
+        <span class="hljs-keyword">end</span>
+    <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+subplot(<span class="hljs-number">121</span>),imshow(A1),title(<span class="hljs-string">'原图'</span>);
+subplot(<span class="hljs-number">122</span>),imshow(A2),title(<span class="hljs-string">'分段灰度变换'</span>);</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/2020041218220220.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjcyNTMy,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="avatar"></p>
+<h5 id="（3）非线性灰度变换"><a href="#（3）非线性灰度变换" class="headerlink" title="（3）非线性灰度变换"></a>（3）非线性灰度变换</h5><p>某些非线性函数：对数函数、指数函数等作为映射函数的时候，可实现非线性变换。</p>
+<p><strong>1.对数变换</strong></p>
+<p>对低灰度区进行拉伸，对高灰度区进行压缩。</p>
+<script type="math/tex; mode=display">
+g(i,j) = a+\frac{ln[f(i,j)+1]}{b·lnc}</script><pre><code class="hljs matlab">A = imread(<span class="hljs-string">'412.jpg'</span>);
+A1 = im2double(rgb2gray(A));<span class="hljs-comment">%彩色图像转为灰度图像</span>
+subplot(<span class="hljs-number">221</span>),imhist(A1)<span class="hljs-comment">%查看灰度直方图</span>
+subplot(<span class="hljs-number">222</span>),imshow(A1);
+A2 = <span class="hljs-built_in">log</span>(A1+<span class="hljs-number">1</span>);
+subplot(<span class="hljs-number">223</span>),imhist(A2)
+subplot(<span class="hljs-number">224</span>),imshow(A2);</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/20200412184017156.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjcyNTMy,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="avatar"></p>
+<p><strong>2.指数变换</strong></p>
+<p>对高灰度区拉伸。</p>
+<script type="math/tex; mode=display">
+g(i,j) = b^{c[f(i,j)-a]}-1</script><pre><code class="hljs matlab">A = imread(<span class="hljs-string">'412.jpg'</span>);
+A = rgb2gray(A);
+A1 = double(A);
+A2 = <span class="hljs-number">1.5</span>.^(A1*<span class="hljs-number">0.070</span>)<span class="hljs-number">-1</span>;
+A1 = uint8(A1);
+A2 = uint8(A2);
+subplot(<span class="hljs-number">221</span>),imhist(A1)<span class="hljs-comment">%查看灰度直方图</span>
+subplot(<span class="hljs-number">222</span>),imshow(A1);
+subplot(<span class="hljs-number">223</span>),imhist(A2)
+subplot(<span class="hljs-number">224</span>),imshow(A2);</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/20200412191828292.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjcyNTMy,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="avatar"></p>
+<blockquote>
+<p>这里我发现了MATLAB里面 im2double 和 double原来是有区别的？于是去查了下……</p>
+<p>im2double()是转换为double类型以后并且归一化为[0,1]中，而double没有做此处理。</p>
+</blockquote>
+<h4 id="2-直方图修正法"><a href="#2-直方图修正法" class="headerlink" title="2.直方图修正法"></a>2.直方图修正法</h4><p>一般的图像灰度分布集中在较窄的区间，导致图像细节不清晰，使用直方图修正法可以让图像的灰度间距拉开或者让灰度分布均匀而增大反差，使得图像细节清晰。</p>
+<p>直方图修正法包括：直方图均衡化和直方图规定化。</p>
+<h5 id="（1）直方图均衡化"><a href="#（1）直方图均衡化" class="headerlink" title="（1）直方图均衡化"></a>（1）直方图均衡化</h5><p>直方图均衡化是将原图像的直方图通过变换函数修正为均匀的直方图，然后按均衡直方图修改原图像。</p>
+<p>变换函数：（离散）</p>
+<script type="math/tex; mode=display">
+Sk = T(Rk) = \sum \frac{nj}{n}</script><p>MATLAB里刚好有histeq()函数可以用于均衡化。</p>
+<p>其中：histeq()有两个参数，第一个参数为要处理的图像，第二个参数为处理后的灰度级个数。</p>
+<pre><code class="hljs matlab">A = imread(<span class="hljs-string">'412.jpg'</span>);
+A1 = rgb2gray(A);
+A2 = histeq(A1,<span class="hljs-number">64</span>);
+subplot(<span class="hljs-number">221</span>),imhist(A1)<span class="hljs-comment">%查看灰度直方图</span>
+subplot(<span class="hljs-number">222</span>),imshow(A1);
+subplot(<span class="hljs-number">223</span>),imhist(A2)
+subplot(<span class="hljs-number">224</span>),imshow(A2);</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/2020041219512449.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjcyNTMy,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="avatar"></p>
+<h5 id="（2）直方图规定化"><a href="#（2）直方图规定化" class="headerlink" title="（2）直方图规定化"></a>（2）直方图规定化</h5><p>直方图规定化是使原图像灰度直方图变成规定形状的直方图来对图像作修正。</p>
+<p>直方图均衡化是直方图规定化的一个特例。</p>
+<pre><code class="hljs matlab">A = imread(<span class="hljs-string">'412.jpg'</span>);
+A1 = rgb2gray(A);
+h=<span class="hljs-number">0</span>:<span class="hljs-number">255</span>;
+h=<span class="hljs-number">1</span>-h/<span class="hljs-number">255</span>;<span class="hljs-comment">%目标直方图</span>
+A2 = histeq(A1,h);
+subplot(<span class="hljs-number">221</span>),imhist(A1)<span class="hljs-comment">%查看灰度直方图</span>
+subplot(<span class="hljs-number">222</span>),imshow(A1);
+subplot(<span class="hljs-number">223</span>),imhist(A2)
+subplot(<span class="hljs-number">224</span>),imshow(A2);</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/20200412200653726.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNjcyNTMy,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" alt="avatar"></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/技术/">技术</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/图像处理/">图像处理</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Matlab/">Matlab</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/28/2020-3、4月记/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2020-3、4月记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/03/01/2020-1、2月记/">
+                        <span class="hidden-mobile">2020-1、2月记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script defer src="https://cdn.staticfile.org/valine/1.4.4/Valine.min.js" ></script>
+
+  <script type="text/javascript">
+    var oldLoadVa = window.onload;
+    window.onload = function () {
+      oldLoadVa && oldLoadVa();
+
+      new Valine({
+        el: "#vcomments",
+        app_id: "3RO7uNsUa0mDFJeViDvb9hiv-gzGzoHsz",
+        app_key: "vAOgCiCTzJqAcXPOCXMLwlSP",
+        placeholder: "_(:з」∠)_有什么话想要对我说吗？",
+        path: window.location.pathname,
+        avatar: "retro",
+        meta: ["nick","mail","link"],
+        pageSize: "10",
+        lang: "zh-CN",
+        highlight: false,
+        recordIP: false,
+        serverURLs: "",
+      });
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" rel="nofollow noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+  <a href="/" target="_blank" rel="nofollow noopener"> <b>方慕珩小可爱</b></a><br />
+  由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动  
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>主题：Fluid</span></a>
+    
+
+    
+
+    
+    <br />
+  <span id="timeDate">载入天数...</span>
+  <span id="times">载入时分秒...</span>
+  <script>
+  var now = new Date();
+  function createtime(){
+      var grt= new Date("02/01/2019 00:00:00");//此处修改你的建站时间或者网站上线时间
+      now.setTime(now.getTime()+250);
+      days = (now - grt ) / 1000 / 60 / 60 / 24;
+      dnum = Math.floor(days);
+      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+      hnum = Math.floor(hours);
+      if(String(hnum).length ==1 ){
+          hnum = "0" + hnum;
+      }
+      minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+      mnum = Math.floor(minutes);
+      if(String(mnum).length ==1 ){
+                mnum = "0" + mnum;
+      }
+      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+      snum = Math.round(seconds);
+      if(String(snum).length ==1 ){
+                snum = "0" + snum;
+      }
+      document.getElementById("timeDate").innerHTML = "这颗小星球已经遨游了&nbsp"+dnum+"&nbsp天";
+      document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+  }
+  setInterval("createtime()",250);
+  </script>
+</div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "图像处理-灰度变换&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.staticfile.org/mathjax/3.0.5/es5/tex-svg.js" ></script>
+
+  
+
+
+
+  
+  
+    <script>
+      !function (e, t, a) {
+        function r() {
+          for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
+          requestAnimationFrame(r)
+        }
+
+        function n() {
+          var t = "function" == typeof e.onclick && e.onclick;
+          e.onclick = function (e) {
+            t && t(), o(e)
+          }
+        }
+
+        function o(e) {
+          var a = t.createElement("div");
+          a.className = "heart", s.push({
+            el: a,
+            x: e.clientX - 5,
+            y: e.clientY - 5,
+            scale: 1,
+            alpha: 1,
+            color: c()
+          }), t.body.appendChild(a)
+        }
+
+        function i(e) {
+          var a = t.createElement("style");
+          a.type = "text/css";
+          try {
+            a.appendChild(t.createTextNode(e))
+          } catch (t) {
+            a.styleSheet.cssText = e
+          }
+          t.getElementsByTagName("head")[0].appendChild(a)
+        }
+
+        function c() {
+          return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+        }
+
+        var s = [];
+        e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {
+          setTimeout(e, 1e3 / 60)
+        }, i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"), n(), r()
+      }(window, document);
+    </script>
+  
+
+
+
+  <script>(function (i, s, o, g, r, a, m) {
+      i['DaoVoiceObject'] = r;
+      i[r] = i[r] ||
+        function () {
+          (i[r].q = i[r].q || []).push(arguments);
+        };
+      i[r].l = 1 * new Date();
+      a = s.createElement(o);
+      m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      a.charset = 'utf-8';
+      m.parentNode.insertBefore(a, m);
+    })(window, document, 'script', ('https:' === document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/56fbfd12.js", 'daovoice');
+    daovoice('init', {
+      app_id: "56fbfd12",
+    });
+    daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

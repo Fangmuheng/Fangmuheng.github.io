@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="What could be more exciting than proving yourself?">
+  <meta name="author" content="Fangmuheng">
+  <meta name="keywords" content="Blog">
+  <title>js学习笔记-对象原型 - 方慕珩</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/github-gist.min.css">
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>方慕珩</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/links/">
+              <i class="iconfont icon-link-fill"></i>
+              友链</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/1.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2019-02-11 15:15">
+                    星期一, 二月 11日 2019, 3:15 下午
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    1.4k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    16
+                     分钟
+                  </span>
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  <span id="busuanzi_container_page_pv" class="post-meta" style="display: none">
+                    <i class="iconfont icon-eye" aria-hidden="true"></i>
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>JavaScript中的对象原型介绍。</p>
+<a id="more"></a>
+<blockquote>
+<p>JavaScript 常被描述为一种<strong>基于原型的语言 (prototype-based language)</strong>——每个对象拥有一个<strong>原型对象</strong>，对象以其原型为模板、从原型继承方法和属性。原型对象也可能拥有原型，并从中继承方法和属性，一层一层、以此类推。这种关系常被称为<strong>原型链 (prototype chain)</strong>，它解释了为何一个对象会拥有定义在其他对象中的属性和方法。 </p>
+<p>在传统的 OOP 中，首先定义“类”，此后创建对象实例时，类中定义的所有属性和方法都被复制到实例中。在 JavaScript 中并不如此复制——而是在对象实例和它的构造器之间建立一个链接（它是<code>__proto__</code>属性，指向这个对象的构造函数的原型对象，是从构造函数的<code>prototype</code>属性派生的），之后通过上溯原型链，在构造器中找到这些属性和方法 。</p>
+</blockquote>
+<p>在此感谢<a href="https://www.cnblogs.com/gulei/p/6733707.html这篇文章给予我的启迪" target="_blank" rel="noopener">https://www.cnblogs.com/gulei/p/6733707.html这篇文章给予我的启迪</a></p>
+<p>（这篇文章解释的很棒<code>_(:з」∠)_</code>）。</p>
+<p>在JavaScript中，每个函数都有一个特殊的属性叫做<code>原型（prototype）</code>，如下图示例：</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doSomething</span>(<span class="hljs-params"></span>)</span>&#123;&#125;
+<span class="hljs-built_in">console</span>.log( doSomething.prototype );
+<span class="hljs-comment">// It does not matter how you declare the function, a</span>
+<span class="hljs-comment">//  function in javascript will always have a default</span>
+<span class="hljs-comment">//  prototype property.</span>
+<span class="hljs-keyword">var</span> doSomething = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;&#125;; 
+<span class="hljs-built_in">console</span>.log( doSomething.prototype );<span class="hljs-comment">//原型为：Object()</span>
+
+<span class="hljs-comment">//会出现以下结果：</span>
+
+&#123;
+    <span class="hljs-attr">constructor</span>: ƒ doSomething(),
+    <span class="hljs-attr">__proto__</span>: &#123;                             
+        <span class="hljs-attr">constructor</span>: ƒ <span class="hljs-built_in">Object</span>(),
+        <span class="hljs-attr">hasOwnProperty</span>: ƒ hasOwnProperty(),
+        <span class="hljs-attr">isPrototypeOf</span>: ƒ isPrototypeOf(),
+        <span class="hljs-attr">propertyIsEnumerable</span>: ƒ propertyIsEnumerable(),
+        <span class="hljs-attr">toLocaleString</span>: ƒ toLocaleString(),
+        <span class="hljs-attr">toString</span>: ƒ toString(),
+        <span class="hljs-attr">valueOf</span>: ƒ valueOf()
+    &#125;
+&#125;
+
+<span class="hljs-comment">//也可以添加一些属性</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doSomething</span>(<span class="hljs-params"></span>)</span>&#123;&#125;
+doSomething.prototype.foo = <span class="hljs-string">"bar"</span>;
+<span class="hljs-built_in">console</span>.log( doSomething.prototype );
+
+<span class="hljs-comment">//结果如下:</span>
+
+&#123;
+    <span class="hljs-attr">foo</span>: <span class="hljs-string">"bar"</span>,
+    <span class="hljs-attr">constructor</span>: ƒ doSomething(),
+    <span class="hljs-attr">__proto__</span>: &#123;……&#125;
+&#125;</code></pre>
+<p>如果你new了一个对象，创建一个doSomething的实例，也就是如下图所示：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> doSomeInstancing = <span class="hljs-keyword">new</span> doSomething();
+doSomeInstancing.prop = <span class="hljs-string">"some value"</span>;
+<span class="hljs-built_in">console</span>.log(doSomeInstancing);
+
+<span class="hljs-comment">//会出现以下结果：</span>
+
+&#123;
+    <span class="hljs-attr">prop</span>: <span class="hljs-string">"some value"</span>,
+    <span class="hljs-attr">__proto__</span>: &#123;
+        <span class="hljs-attr">foo</span>: <span class="hljs-string">"bar"</span>,
+        <span class="hljs-attr">constructor</span>: ƒ doSomething(),
+        <span class="hljs-attr">__proto__</span>: &#123;
+            <span class="hljs-attr">constructor</span>: ƒ <span class="hljs-built_in">Object</span>(),
+            <span class="hljs-attr">hasOwnProperty</span>: ƒ hasOwnProperty(),
+            <span class="hljs-attr">isPrototypeOf</span>: ƒ isPrototypeOf(),
+            <span class="hljs-attr">propertyIsEnumerable</span>: ƒ propertyIsEnumerable(),
+            <span class="hljs-attr">toLocaleString</span>: ƒ toLocaleString(),
+            <span class="hljs-attr">toString</span>: ƒ toString(),
+            <span class="hljs-attr">valueOf</span>: ƒ valueOf()
+        &#125;
+    &#125;
+&#125;</code></pre>
+<p>注释：当你访问doSomeInstancing的一个属性的时候，浏览器会先在doSomeInstancing中是否有这个属性。如果没有，就会在doSomething的<code>__proto__</code>中（即：doSomething.prototype）寻找这个属性。如果没有，就会继续再往上找，直到找到或者没找到返回undefined。</p>
+<p>//一个很不正经的理解：我个人是觉得原型对象和构造器函数应该是：原型对象拥有一个构造函数，构造函数用来创建对象并且赋予对象私有的能力，而原型对象给这些对象提供了一些共有的能力（这个能力其实还是由原型对象来代劳）。</p>
+<h5 id="prototype-属性"><a href="#prototype-属性" class="headerlink" title="prototype 属性"></a>prototype 属性</h5><blockquote>
+<p>我们创建的对象并不能完全继承Object();因为继承的属性和方法是定义在prototype属性上的，即那些以 <code>Object.prototype.</code> 开头的属性，而非仅仅以 <code>Object.</code> 开头的属性。 于是 <code>Object.prototype.watch()、Object.prototype.valueOf()</code> 等等成员，适用于任何继承自 <code>Object()</code> 的对象类型。而<code>Object.is()</code>、<code>Object.keys()</code>，以及其他不在 <code>prototype</code> 对象内的成员，不会被“对象实例”或“继承自 <code>Object()</code> 的对象类型”所继承。这些方法/属性仅能被 <code>Object()</code> 构造器自身使用。 </p>
+</blockquote>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> person2 = <span class="hljs-built_in">Object</span>.create(person1);
+<span class="hljs-comment">//这个person2是以person1为原型对象创建的，所以person2.__proto__会返回person1</span></code></pre>
+<h5 id="constructor-属性"><a href="#constructor-属性" class="headerlink" title="constructor 属性"></a>constructor 属性</h5><p>每个实例对象都从原型中继承了一个constructor属性，该属性指向了用于构造此实例对象的构造函数。</p>
+<pre><code class="hljs javascript">person1.constructor   <span class="hljs-comment">//Person()</span></code></pre>
+<blockquote>
+<p>可以在 <code>constructor</code> 属性的末尾添加一对圆括号（括号中包含所需的参数），从而用这个构造器创建另一个对象实例。毕竟构造器是一个函数，故可以通过圆括号调用；只需在前面添加 <code>new</code> 关键字，便能将此函数作为构造器使用。 </p>
+</blockquote>
+<pre><code class="hljs javascript"><span class="hljs-comment">//如：</span>
+<span class="hljs-keyword">var</span> person3 = <span class="hljs-keyword">new</span> person1.constructor(<span class="hljs-string">'Karen'</span>, <span class="hljs-string">'Stephenson'</span>, <span class="hljs-number">26</span>, <span class="hljs-string">'female'</span>, [<span class="hljs-string">'playing drums'</span>, <span class="hljs-string">'mountain climbing'</span>]);
+
+<span class="hljs-comment">//和以下代码一样：</span>
+<span class="hljs-keyword">var</span> person3 = <span class="hljs-keyword">new</span> Person(<span class="hljs-string">'Karen'</span>, <span class="hljs-string">'Stephenson'</span>, <span class="hljs-number">26</span>, <span class="hljs-string">'female'</span>, [<span class="hljs-string">'playing drums'</span>, <span class="hljs-string">'mountain climbing'</span>]);</code></pre>
+<p>此外，<code>constructor</code> 属性还有其他用途。想要获得某个对象实例的构造器的名字可以这么用：</p>
+<pre><code class="hljs javascript">person1.constructor.name</code></pre>
+<h5 id="修改原型"><a href="#修改原型" class="headerlink" title="修改原型"></a>修改原型</h5><p>我们可以通过构造函数来修改构造器的 <code>prototype</code> 属性 。</p>
+<p>比如：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">//我们用Person（）构造函数为prototype添加了一个farewell方法</span>
+Person.prototype.farewell = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+  alert(<span class="hljs-keyword">this</span>.name.first + <span class="hljs-string">' has left the building. Bye for now!'</span>);
+&#125;
+<span class="hljs-comment">//用我们创建的对象来调用，会发现可以运行</span>
+person1.farewell();
+<span class="hljs-comment">//整条继承链动态地更新了，任何由此构造器创建的对象实例都自动获得了这个方法。</span></code></pre>
+<blockquote>
+<p>旧有对象实例的可用功能被自动更新了。这证明了先前描述的原型链模型。这种继承模型下，上游对象的方法不会复制到下游的对象实例中；下游对象本身虽然没有定义这些方法，但浏览器会通过上溯原型链、从上游对象中找到它们。这种继承模型提供了一个强大而可扩展的功能系统。 </p>
+</blockquote>
+<p>Note：你可能会在 <code>prototype</code> 上定义常属性 (constant property) （指那些你永远无需改变的属性），但一般来说，在构造器内定义属性更好。 </p>
+<p>一种极其常见的对象定义模式是，<strong>在构造器（函数体）中定义属性、在 prototype 属性上定义方法</strong>。如此，构造器只包含属性定义，而方法则分装在不同的代码块，代码更具可读性。</p>
+<p>即如下代码所示：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// 构造器及其属性定义</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Test</span>(<span class="hljs-params">a,b,c,d</span>) </span>&#123;
+  <span class="hljs-comment">// 属性定义</span>
+&#125;;
+
+<span class="hljs-comment">// 定义第一个方法</span>
+
+Test.prototype.x = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123; ... &#125;
+
+<span class="hljs-comment">// 定义第二个方法</span>
+
+Test.prototype.y = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123; ... &#125;
+
+<span class="hljs-comment">// 等等……</span></code></pre>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/js/">js</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/02/11/js学习笔记-继承/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">js学习笔记-继承</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2019/02/09/js学习笔记-对象/">
+                        <span class="hidden-mobile">js学习笔记-对象</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script defer src="https://cdn.staticfile.org/valine/1.4.4/Valine.min.js" ></script>
+
+  <script type="text/javascript">
+    var oldLoadVa = window.onload;
+    window.onload = function () {
+      oldLoadVa && oldLoadVa();
+
+      new Valine({
+        el: "#vcomments",
+        app_id: "3RO7uNsUa0mDFJeViDvb9hiv-gzGzoHsz",
+        app_key: "vAOgCiCTzJqAcXPOCXMLwlSP",
+        placeholder: "_(:з」∠)_有什么话想要对我说吗？",
+        path: window.location.pathname,
+        avatar: "retro",
+        meta: ["nick","mail","link"],
+        pageSize: "10",
+        lang: "zh-CN",
+        highlight: false,
+        recordIP: false,
+        serverURLs: "",
+      });
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" rel="nofollow noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+  <a href="/" target="_blank" rel="nofollow noopener"> <b>方慕珩小可爱</b></a><br />
+  由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动  
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>主题：Fluid</span></a>
+    
+
+    
+
+    
+    <br />
+  <span id="timeDate">载入天数...</span>
+  <span id="times">载入时分秒...</span>
+  <script>
+  var now = new Date();
+  function createtime(){
+      var grt= new Date("02/01/2019 00:00:00");//此处修改你的建站时间或者网站上线时间
+      now.setTime(now.getTime()+250);
+      days = (now - grt ) / 1000 / 60 / 60 / 24;
+      dnum = Math.floor(days);
+      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+      hnum = Math.floor(hours);
+      if(String(hnum).length ==1 ){
+          hnum = "0" + hnum;
+      }
+      minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+      mnum = Math.floor(minutes);
+      if(String(mnum).length ==1 ){
+                mnum = "0" + mnum;
+      }
+      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+      snum = Math.round(seconds);
+      if(String(snum).length ==1 ){
+                snum = "0" + snum;
+      }
+      document.getElementById("timeDate").innerHTML = "这颗小星球已经遨游了&nbsp"+dnum+"&nbsp天";
+      document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+  }
+  setInterval("createtime()",250);
+  </script>
+</div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "js学习笔记-对象原型&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script>
+      !function (e, t, a) {
+        function r() {
+          for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
+          requestAnimationFrame(r)
+        }
+
+        function n() {
+          var t = "function" == typeof e.onclick && e.onclick;
+          e.onclick = function (e) {
+            t && t(), o(e)
+          }
+        }
+
+        function o(e) {
+          var a = t.createElement("div");
+          a.className = "heart", s.push({
+            el: a,
+            x: e.clientX - 5,
+            y: e.clientY - 5,
+            scale: 1,
+            alpha: 1,
+            color: c()
+          }), t.body.appendChild(a)
+        }
+
+        function i(e) {
+          var a = t.createElement("style");
+          a.type = "text/css";
+          try {
+            a.appendChild(t.createTextNode(e))
+          } catch (t) {
+            a.styleSheet.cssText = e
+          }
+          t.getElementsByTagName("head")[0].appendChild(a)
+        }
+
+        function c() {
+          return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+        }
+
+        var s = [];
+        e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {
+          setTimeout(e, 1e3 / 60)
+        }, i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"), n(), r()
+      }(window, document);
+    </script>
+  
+
+
+
+  <script>(function (i, s, o, g, r, a, m) {
+      i['DaoVoiceObject'] = r;
+      i[r] = i[r] ||
+        function () {
+          (i[r].q = i[r].q || []).push(arguments);
+        };
+      i[r].l = 1 * new Date();
+      a = s.createElement(o);
+      m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      a.charset = 'utf-8';
+      m.parentNode.insertBefore(a, m);
+    })(window, document, 'script', ('https:' === document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/56fbfd12.js", 'daovoice');
+    daovoice('init', {
+      app_id: "56fbfd12",
+    });
+    daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

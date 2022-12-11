@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="What could be more exciting than proving yourself?">
+  <meta name="author" content="Fangmuheng">
+  <meta name="keywords" content="Blog">
+  <title>js学习笔记-事件 - 方慕珩</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/github-gist.min.css">
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>方慕珩</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/links/">
+              <i class="iconfont icon-link-fill"></i>
+              友链</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/1.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2019-02-08 18:03">
+                    星期五, 二月 8日 2019, 6:03 晚上
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    1.5k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    18
+                     分钟
+                  </span>
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  <span id="busuanzi_container_page_pv" class="post-meta" style="display: none">
+                    <i class="iconfont icon-eye" aria-hidden="true"></i>
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>JavaScript中的事件（机制/冒泡、捕获与委托）。</p>
+<a id="more"></a>
+<p>1.事件</p>
+<blockquote>
+<p>事件是您在编程时系统内发生的动作或者发生的事情，系统通过它来告诉您在您愿意的情况下您可以以某种方式对它做出回应。 </p>
+<p>事件类型参考：<a href="https://developer.mozilla.org/zh-CN/docs/Web/Events" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/Events</a></p>
+<p>每个可用的事件都会有一个<strong>事件处理器</strong>，也就是事件触发时会运行的代码块。当我们定义了一个用来回应事件被激发的代码块的时候，我们说我们<strong>注册了一个事件处理器</strong>。注意事件处理器有时候被叫做<strong>事件监听器</strong>——从我们的用意来看这两个名字是相同的，尽管严格地来说这块代码既监听也处理事件。监听器留意事件是否发生，然后处理器就是对事件发生做出的回应。 </p>
+</blockquote>
+<p>Note：网络事件（不是 JavaScript 语言的核心）是被定义成内置于浏览器的JavaScript APIs。</p>
+<p>2.事件处理器属性：</p>
+<ul>
+<li><p><code>onclick</code>：点击触发事件</p>
+</li>
+<li><p><code>btn.onfocus</code>及<code>btn.onblur</code> ：光标离开/点击触发。</p>
+</li>
+<li><p><code>btn.ondblclick</code>  ：双击。</p>
+</li>
+<li><p><code>window.onkeypress</code>, <code>window.onkeydown</code>, <code>window.onkeyup</code>  ：按动键盘触发。</p>
+</li>
+<li><blockquote>
+<p>keydown: 当用户按下键盘上的任意键时触发，而且如果按住不放的话，会重复触发此事件。<br>keypress: 当用户按下键盘上的字符键时触发，而且如果按住不放的话，会重复触发此事件。<br>（keypress事件存在跨浏览器问题，按下非字符键时有的也会触发keypress。）</p>
+<p>keyup: 当用户释放键盘上的按键时触发。</p>
+</blockquote>
+</li>
+<li><p><code>btn.onmouseover</code> 和 <code>btn.onmouseout</code> ：鼠标放置/移开</p>
+</li>
+</ul>
+<p>3.不要使用行内事件处理器。</p>
+<pre><code class="hljs javascript">//以下两种方式混用 HTML 和 JavaScript，使得文档很难解析。应该在一个地方写JS代码。
+&lt;button onclick="bgChange()"&gt;Press me&lt;/button&gt;
+-
+function bgChange() &#123;
+  var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+  document.body.style.backgroundColor = rndCol;
+&#125;
+或者：
+&lt;button onclick="alert('Hello, this is my old-fashioned event handler!');"&gt;Press me&lt;/button&gt;
+
+//即使在单一文件中，内置事件处理器也不是一个好主意。比如有100个button时。
+//下面这样写才是好的选择：
+var buttons = document.querySelectorAll('button');
+for (var i = 0; i &lt; buttons.length; i++) &#123;
+  buttons[i].onclick = bgChange;
+&#125;//给每个button都添加上了事件处理器。</code></pre>
+<p>4.<code>addEventListener()</code>和<code>removeEventListener()</code></p>
+<p><code>addEventListener()</code>需要两个参数，一个是事件名称，一个是回应事件的代码。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> btn = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'button'</span>);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bgChange</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">var</span> rndCol = <span class="hljs-string">'rgb('</span> + random(<span class="hljs-number">255</span>) + <span class="hljs-string">','</span> + random(<span class="hljs-number">255</span>) + <span class="hljs-string">','</span> + random(<span class="hljs-number">255</span>) + <span class="hljs-string">')'</span>;
+  <span class="hljs-built_in">document</span>.body.style.backgroundColor = rndCol;
+&#125;   
+
+btn.addEventListener(<span class="hljs-string">'click'</span>, bgChange);
+<span class="hljs-comment">//也可以写成匿名函数如下：</span>
+btn.addEventListener(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">var</span> rndCol = <span class="hljs-string">'rgb('</span> + random(<span class="hljs-number">255</span>) + <span class="hljs-string">','</span> + random(<span class="hljs-number">255</span>) + <span class="hljs-string">','</span> + random(<span class="hljs-number">255</span>) + <span class="hljs-string">')'</span>;
+  <span class="hljs-built_in">document</span>.body.style.backgroundColor = rndCol;
+&#125;);
+
+<span class="hljs-comment">//removeEventListener()</span></code></pre>
+<p><code>removeEventListener()</code>是方法移除监听器，用来移除上个代码块中的事件监听器。</p>
+<pre><code class="hljs javascript">btn.removeEventListener(<span class="hljs-string">'click'</span>, bgChange);</code></pre>
+<p>优点：</p>
+<pre><code class="hljs javascript">myElement.onclick = functionA;
+myElement.onclick = functionB;
+<span class="hljs-comment">//不可以，第一个将会被覆盖。（只运行functionB）</span>
+myElement.addEventListener(<span class="hljs-string">'click'</span>, functionA);
+myElement.addEventListener(<span class="hljs-string">'click'</span>, functionB);
+<span class="hljs-comment">//可以，点击时触发两个事件。（都运行）</span></code></pre>
+<p>两个函数详细使用方法：</p>
+<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/addEventListener" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/addEventListener</a></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/removeEventListener" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/removeEventListener</a></p>
+</blockquote>
+<p>5.如何选择机制？（事件处理器/addEventListener() etc.）</p>
+<ul>
+<li><p>事件处理程序属性：功能和选项会少，但是具有更好的跨浏览器兼容性(在Internet Explorer 8的支持下)。</p>
+</li>
+<li><p>DOM Level 2 Events (addEventListener(), etc.) ：更强大，但也可以变得更加复杂，并且支持不足（只支持到Internet Explorer 9）。</p>
+</li>
+</ul>
+<p>6.其他事件概念</p>
+<ul>
+<li>事件对象：事件在浏览器中是以对象的形式存在的，即event。触发一个事件就会产生一个事件对象event，该对象包含着所有与事件有关的信息。包括导致事件的元素、事件的类型以及其他与特定事件相关的信息。事件通常与函数结合，事件对象只有当事件发生的时候才产生，只能在处理函数内部调用，处理函数运行结束后自动销毁。一般使用：e / evt / event 作为事件对象。</li>
+<li>阻止默认行为：事件不执行它的默认行为</li>
+</ul>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> form = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'form'</span>);
+<span class="hljs-keyword">var</span> fname = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'fname'</span>);
+<span class="hljs-keyword">var</span> lname = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'lname'</span>);
+<span class="hljs-keyword">var</span> submit = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'submit'</span>);
+<span class="hljs-keyword">var</span> para = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'p'</span>);
+<span class="hljs-comment">//onsubmit事件处理程序（在提交的时候，在一个表单上发起submit事件）</span>
+form.onsubmit = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>&#123;
+  <span class="hljs-keyword">if</span> (fname.value === <span class="hljs-string">''</span> || lname.value === <span class="hljs-string">''</span>) &#123;
+    e.preventDefault();<span class="hljs-comment">//阻止提交</span>
+    para.textContent = <span class="hljs-string">'You need to fill in both names!'</span>;
+  &#125;
+&#125;
+<span class="hljs-comment">//但是这是一种很弱的阻止行为，比如说当你输入空格的时候，就不会阻止你提交了:)</span></code></pre>
+<ul>
+<li><p>事件冒泡及捕获（两种机制）：主要描述当在一个元素上有两个相同类型的事件处理器被激活会发生什么。</p>
+<blockquote>
+<p>IE提出的事件流叫做事件冒泡。即事件开始时由最具体的元素接收，然后逐级向上传播到较为不具体的节点。</p>
+<p>网景公司提出的事件流叫事件捕获流。和冒泡完全相反。</p>
+</blockquote>
+<p>阻止：event.stopPropagation() </p>
+</li>
+<li><p>事件委托：</p>
+<blockquote>
+<p>事件捕获指的是从document到触发事件的那个节点，即自上而下的去触发事件。相反的，事件冒泡是自下而上的去触发事件。绑定事件方法的第三个参数（事件委托），就是控制事件触发顺序是否为事件捕获。true,事件捕获；false,事件冒泡。默认false,即事件冒泡。Jquery的e.stopPropagation会阻止冒泡，意思就是到我为止，我以上（父类）事件就不要触发了。</p>
+<p>（引用：<a href="https://www.cnblogs.com/qq9694526/p/5653728.html）" target="_blank" rel="noopener">https://www.cnblogs.com/qq9694526/p/5653728.html）</a></p>
+</blockquote>
+</li>
+</ul>
+<pre><code class="hljs javascript">&lt;script&gt;
+    <span class="hljs-built_in">window</span>.onload=<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>)</span>&#123;
+        <span class="hljs-keyword">var</span> odiv1=<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"div1"</span>);
+        <span class="hljs-keyword">var</span> odiv2=<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"div2"</span>);
+        <span class="hljs-keyword">var</span> odiv3=<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"div3"</span>);
+ 
+        odiv1.addEventListener(<span class="hljs-string">"click"</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;
+            alert(<span class="hljs-string">"div1"</span>);
+        &#125;,<span class="hljs-literal">true</span>);<span class="hljs-comment">//设置addEventListener的第三个参数为true，即捕获。</span>
+        odiv2.addEventListener(<span class="hljs-string">"click"</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;
+            alert(<span class="hljs-string">"div2"</span>);
+        &#125;,<span class="hljs-literal">true</span>);
+        odiv3.addEventListener(<span class="hljs-string">"click"</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;
+            alert(<span class="hljs-string">"div3"</span>);
+        &#125;,<span class="hljs-literal">true</span>);
+    &#125;
+&lt;<span class="hljs-regexp">/script&gt;</span></code></pre>
+<p>【事件流：从页面中接受事件的顺序。】</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/js/">js</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/02/09/js学习笔记-Hoisting/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">js学习笔记-Hoisting</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2019/02/07/js学习笔记-条件、循环、函数/">
+                        <span class="hidden-mobile">js学习笔记-条件、循环、函数</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script defer src="https://cdn.staticfile.org/valine/1.4.4/Valine.min.js" ></script>
+
+  <script type="text/javascript">
+    var oldLoadVa = window.onload;
+    window.onload = function () {
+      oldLoadVa && oldLoadVa();
+
+      new Valine({
+        el: "#vcomments",
+        app_id: "3RO7uNsUa0mDFJeViDvb9hiv-gzGzoHsz",
+        app_key: "vAOgCiCTzJqAcXPOCXMLwlSP",
+        placeholder: "_(:з」∠)_有什么话想要对我说吗？",
+        path: window.location.pathname,
+        avatar: "retro",
+        meta: ["nick","mail","link"],
+        pageSize: "10",
+        lang: "zh-CN",
+        highlight: false,
+        recordIP: false,
+        serverURLs: "",
+      });
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" rel="nofollow noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+  <a href="/" target="_blank" rel="nofollow noopener"> <b>方慕珩小可爱</b></a><br />
+  由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动  
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>主题：Fluid</span></a>
+    
+
+    
+
+    
+    <br />
+  <span id="timeDate">载入天数...</span>
+  <span id="times">载入时分秒...</span>
+  <script>
+  var now = new Date();
+  function createtime(){
+      var grt= new Date("02/01/2019 00:00:00");//此处修改你的建站时间或者网站上线时间
+      now.setTime(now.getTime()+250);
+      days = (now - grt ) / 1000 / 60 / 60 / 24;
+      dnum = Math.floor(days);
+      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+      hnum = Math.floor(hours);
+      if(String(hnum).length ==1 ){
+          hnum = "0" + hnum;
+      }
+      minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+      mnum = Math.floor(minutes);
+      if(String(mnum).length ==1 ){
+                mnum = "0" + mnum;
+      }
+      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+      snum = Math.round(seconds);
+      if(String(snum).length ==1 ){
+                snum = "0" + snum;
+      }
+      document.getElementById("timeDate").innerHTML = "这颗小星球已经遨游了&nbsp"+dnum+"&nbsp天";
+      document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+  }
+  setInterval("createtime()",250);
+  </script>
+</div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "js学习笔记-事件&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script>
+      !function (e, t, a) {
+        function r() {
+          for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
+          requestAnimationFrame(r)
+        }
+
+        function n() {
+          var t = "function" == typeof e.onclick && e.onclick;
+          e.onclick = function (e) {
+            t && t(), o(e)
+          }
+        }
+
+        function o(e) {
+          var a = t.createElement("div");
+          a.className = "heart", s.push({
+            el: a,
+            x: e.clientX - 5,
+            y: e.clientY - 5,
+            scale: 1,
+            alpha: 1,
+            color: c()
+          }), t.body.appendChild(a)
+        }
+
+        function i(e) {
+          var a = t.createElement("style");
+          a.type = "text/css";
+          try {
+            a.appendChild(t.createTextNode(e))
+          } catch (t) {
+            a.styleSheet.cssText = e
+          }
+          t.getElementsByTagName("head")[0].appendChild(a)
+        }
+
+        function c() {
+          return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+        }
+
+        var s = [];
+        e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {
+          setTimeout(e, 1e3 / 60)
+        }, i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"), n(), r()
+      }(window, document);
+    </script>
+  
+
+
+
+  <script>(function (i, s, o, g, r, a, m) {
+      i['DaoVoiceObject'] = r;
+      i[r] = i[r] ||
+        function () {
+          (i[r].q = i[r].q || []).push(arguments);
+        };
+      i[r].l = 1 * new Date();
+      a = s.createElement(o);
+      m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      a.charset = 'utf-8';
+      m.parentNode.insertBefore(a, m);
+    })(window, document, 'script', ('https:' === document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/56fbfd12.js", 'daovoice');
+    daovoice('init', {
+      app_id: "56fbfd12",
+    });
+    daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

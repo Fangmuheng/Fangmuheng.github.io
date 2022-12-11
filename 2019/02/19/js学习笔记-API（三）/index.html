@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="What could be more exciting than proving yourself?">
+  <meta name="author" content="Fangmuheng">
+  <meta name="keywords" content="Blog">
+  <title>js学习笔记-API（三） - 方慕珩</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/9.18.1/styles/github-gist.min.css">
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_ijqayz9ro8k.css">
+
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>方慕珩</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/links/">
+              <i class="iconfont icon-link-fill"></i>
+              友链</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/1.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <div class="mt-3 post-meta">
+                  <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+                  <time datetime="2019-02-19 17:20">
+                    星期二, 二月 19日 2019, 5:20 下午
+                  </time>
+                </div>
+              
+
+              <div class="mt-1">
+                
+                  
+                  <span class="post-meta mr-2">
+                    <i class="iconfont icon-chart"></i>
+                    1.7k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta mr-2">
+                      <i class="iconfont icon-clock-fill"></i>
+                    
+                    
+                    20
+                     分钟
+                  </span>
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  <span id="busuanzi_container_page_pv" class="post-meta" style="display: none">
+                    <i class="iconfont icon-eye" aria-hidden="true"></i>
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>
+                
+              </div>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>JavaScript中有关于绘图API的基础知识（1）。</p>
+<p>包括：创建画布、绘制矩形、描边线条与宽度、绘制路径与文本、绘制图片。</p>
+<a id="more"></a>
+<h4 id="绘图API"><a href="#绘图API" class="headerlink" title="绘图API"></a>绘图API</h4><p>学习目标：使用 WebGL 库来创建一个 3D 场景 </p>
+<blockquote>
+<p>IE 8 及以下不支持 2D 画布，IE 11 及以下不支持WebGL（ (Web图形库) 是一种JavaScript API ）。 </p>
+</blockquote>
+<h5 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h5><p>要在网页中创建 2D 或者 3D 场景，必须在 HTML 文件中插入一个<code>&lt;canvas&gt;</code>元素，以界定网页中的绘图区域。 </p>
+<pre><code class="hljs html"><span class="hljs-comment">&lt;!--网页中会生成一块 320 × 240 像素的画布--&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">canvas</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"320"</span> <span class="hljs-attr">height</span>=<span class="hljs-string">"240"</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">canvas</span>&gt;</span></code></pre>
+<h5 id="创建画布及确定尺寸"><a href="#创建画布及确定尺寸" class="headerlink" title="创建画布及确定尺寸"></a>创建画布及确定尺寸</h5><pre><code class="hljs html"><span class="hljs-comment">&lt;!--不明确指定宽高时，画布默认尺寸为 300 × 150 像素--&gt;</span>
+<span class="hljs-comment">&lt;!--class用于选择多个画布--&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">canvas</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"myCanvas"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>添加恰当的反馈信息。<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">canvas</span>&gt;</span></code></pre>
+<p>确定尺寸的时候我们可以在JavaScript中添加代码，如：</p>
+<pre><code class="hljs JavaScript"><span class="hljs-comment">//需要可视化窗口同样大小的画布时可以这么做</span>
+<span class="hljs-keyword">var</span> canvas = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">'.myCanvas'</span>);
+<span class="hljs-keyword">var</span> width = canvas.width = <span class="hljs-built_in">window</span>.innerWidth;
+<span class="hljs-keyword">var</span> height = canvas.height = <span class="hljs-built_in">window</span>.innerHeight;</code></pre>
+<p>Note：</p>
+<p>1.在这里我们定义了width和height两个变量，在后面绘图的时候我们可以使用这两个变量很快捷地访问画布的宽和长。</p>
+<p>2.这个时候文档还是有滚动条的，我们把 <code>&lt;body&gt;</code> 元素的外边距（margin）设为0，并把overflow隐藏就可以.</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span>
+  body &#123;
+    margin: 0;
+    overflow: hidden;
+  &#125;
+<span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span></code></pre>
+<h5 id="获取画布上下文（canvas-context）并完成设置"><a href="#获取画布上下文（canvas-context）并完成设置" class="headerlink" title="获取画布上下文（canvas context）并完成设置"></a>获取画布上下文（canvas context）并完成设置</h5><p>需要获得一个对绘画区域的特殊的引用（称为“<strong>上下文</strong>”）用来在画布上绘图 。</p>
+<p>当我们需要一个2D画布，可以使用 <code>HTMLCanvasElement.getContext()</code>方法获得基础绘图功能：</p>
+<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> ctx = canvas.getContext(<span class="hljs-string">'2d'</span>);</code></pre>
+<blockquote>
+<p><code>ctx</code> 变量包含一个 <code>CanvasRenderingContext2D</code> 对象，画布上所有绘画操作都会涉及到这个对象。 </p>
+</blockquote>
+<ul>
+<li><code>fillStlye</code>属性：设置填充色。</li>
+<li><code>fillRect()</code>方法：绘制覆盖整个区域的矩形，有四个参数。前两个参数是矩形左上顶点的坐标，后两个参数是矩形的长宽 </li>
+</ul>
+<pre><code class="hljs JavaScript">ctx.fillStyle = <span class="hljs-string">'rgb(0,0,0)'</span>;<span class="hljs-comment">//黑色，色值属性与css相同</span>
+ctx.fillRect(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,width,height);</code></pre>
+<h5 id="简单矩形"><a href="#简单矩形" class="headerlink" title="简单矩形"></a>简单矩形</h5><blockquote>
+<p>许多操作都需要提供坐标来指示绘图的确切位置。画布左上角的坐标是(0, 0)，横坐标（x）轴向右延伸，纵坐标（y）轴向下延伸。</p>
+</blockquote>
+<p>绘制一个矩形我们就可以使用<code>fillStlye</code>属性和<code>fillRect()</code>方法。</p>
+<p>注意：</p>
+<p>1.新层会覆盖旧层。</p>
+<p>2.<code>rgba()</code>可以绘制半透明的图形，包括 <strong>rgb</strong> 和<strong>a</strong> 四个参数，<strong>a</strong> 指定了“α 通道”的值，也就是颜色的透明度。值越高透明度越高，底层的内容就越清晰。 </p>
+<p>如：</p>
+<pre><code class="hljs JavaScript">ctx.fillStyle = <span class="hljs-string">'rgba(255, 0, 255, 0.75)'</span>;<span class="hljs-comment">//这里 a = 0.75</span>
+ctx.fillRect(<span class="hljs-number">25</span>, <span class="hljs-number">100</span>, <span class="hljs-number">175</span>, <span class="hljs-number">50</span>);</code></pre>
+<h5 id="描边（stroke）和线条宽度"><a href="#描边（stroke）和线条宽度" class="headerlink" title="描边（stroke）和线条宽度"></a>描边（stroke）和线条宽度</h5><ul>
+<li><code>strokeStlye</code>属性：设置填充色。</li>
+<li><code>strokeRect()</code>方法：绘制覆盖整个区域的矩形，有四个参数。前两个参数是矩形左上顶点的坐标，后两个参数是矩形的长宽 </li>
+</ul>
+<pre><code class="hljs JavaScript">ctx.strokeStyle = <span class="hljs-string">'rgb(255, 255, 255)'</span>;
+ctx.strokeRect(<span class="hljs-number">25</span>, <span class="hljs-number">25</span>, <span class="hljs-number">175</span>, <span class="hljs-number">200</span>);</code></pre>
+<p>默认的描边宽度是 1 像素，可以通过调整 <code>lineWidth</code>属性的值来修改</p>
+<pre><code class="hljs javascript">ctx.lineWidth = <span class="hljs-number">5</span>;<span class="hljs-comment">//添加在绘图方法之前</span></code></pre>
+<h5 id="绘制路径"><a href="#绘制路径" class="headerlink" title="绘制路径"></a>绘制路径</h5><ul>
+<li><code>beginPath()</code>：在钢笔<strong>当前所在位置</strong>开始绘制一条路径。在新的画布中，钢笔起始位置为 (0, 0)。</li>
+<li><code>moveTo()</code>：将钢笔<strong>移动至另一个坐标点</strong>，不记录、不留痕迹，只将钢笔“跳”至新位置。</li>
+<li><code>fill()</code>：通过为当前所绘制路径的区域<strong>填充颜色</strong>来绘制一个新的填充形状。</li>
+<li><code>stroke()</code>：通过为当前绘制路径的区域<strong>描边</strong>，来绘制一个只有边框的形状。</li>
+<li>路径也可和矩形一样使用 <code>lineWidth</code> 和 <code>fillStyle</code> / <code>strokeStyle</code> 等功能。</li>
+</ul>
+<pre><code class="hljs JavaScript"><span class="hljs-comment">//绘制简单路径的基本步骤</span>
+ctx.fillStyle = <span class="hljs-string">'rgb(255, 0, 0)'</span>;<span class="hljs-comment">//颜色</span>
+ctx.beginPath();<span class="hljs-comment">//开始绘制</span>
+ctx.moveTo(<span class="hljs-number">50</span>, <span class="hljs-number">50</span>);<span class="hljs-comment">//钢笔目前所在坐标</span>
+ctx.fill();<span class="hljs-comment">// 绘制路径</span></code></pre>
+<pre><code class="hljs JavaScript"><span class="hljs-comment">//将角度换算为弧度，在为 JavaScript 提供角度值时非常实用，JS 基本上只接受弧度值，而人类更习惯用角度值</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">degToRad</span>(<span class="hljs-params">degrees</span>) </span>&#123;
+  <span class="hljs-keyword">return</span> degrees * <span class="hljs-built_in">Math</span>.PI / <span class="hljs-number">180</span>;
+&#125;;</code></pre>
+<p><strong>三角形</strong>：</p>
+<pre><code class="hljs JavaScript">ctx.fillStyle = <span class="hljs-string">'rgb(255, 0, 0)'</span>;
+ctx.beginPath();
+ctx.moveTo(<span class="hljs-number">50</span>, <span class="hljs-number">50</span>);
+<span class="hljs-comment">//以上是基本步骤</span>
+ctx.lineTo(<span class="hljs-number">150</span>, <span class="hljs-number">50</span>);<span class="hljs-comment">//移动到（150,50）</span>
+<span class="hljs-keyword">var</span> triHeight = <span class="hljs-number">50</span> * <span class="hljs-built_in">Math</span>.tan(degToRad(<span class="hljs-number">60</span>));<span class="hljs-comment">//计算三角形的高</span>
+ctx.lineTo(<span class="hljs-number">100</span>, <span class="hljs-number">50</span>+triHeight);<span class="hljs-comment">//移动</span>
+ctx.lineTo(<span class="hljs-number">50</span>, <span class="hljs-number">50</span>);<span class="hljs-comment">//移动</span>
+ctx.fill();<span class="hljs-comment">//填充</span></code></pre>
+<p><strong>圆</strong>：</p>
+<p><code>arc()</code>方法：有六个参数。前两个指定圆心的位置坐标，第三个是圆的半径，第四、五个是绘制弧的起、止角度（给定 0° 和 360° 便能绘制一个完整的圆），第六个是绘制方向（<code>false</code> 是顺时针，<code>true</code> 是逆时针）。</p>
+<p>【0°：水平向右】 </p>
+<p>如：</p>
+<pre><code class="hljs JavaScript"><span class="hljs-comment">//圆心坐标（150,106），圆半径50，起止角度0-360，顺时针。</span>
+ctx.arc(<span class="hljs-number">150</span>, <span class="hljs-number">106</span>, <span class="hljs-number">50</span>, degToRad(<span class="hljs-number">0</span>), degToRad(<span class="hljs-number">360</span>), <span class="hljs-literal">false</span>);</code></pre>
+<blockquote>
+<p>如果要填充一个未完成（也就是没有首尾相接）的路径，浏览器将在起、止点件绘制一条直线，然后直接填充。 </p>
+</blockquote>
+<h5 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h5><p>以下两个函数用于绘制文本：</p>
+<ul>
+<li><code>fillText()</code>：绘制有填充色的文本。</li>
+<li><code>strokeText()</code>：绘制文本外边框（描边）。</li>
+</ul>
+<p>Note:</p>
+<p>1.这两个函数有三个基本的参数：需要绘制的文字、文本框（顾名思义，围绕着需要绘制文字的方框）左上顶点的X、Y坐标。</p>
+<p>2.还有一系列帮助控制文本渲染的属性：比如用于指定字体族、字号的 <code>font</code>，它的值和语法与 CSS 的 <code>font</code> 属性一致。 </p>
+<pre><code class="hljs JavaScript">ctx.strokeStyle = <span class="hljs-string">'white'</span>;<span class="hljs-comment">//边框颜色白色</span>
+ctx.lineWidth = <span class="hljs-number">1</span>;<span class="hljs-comment">//边框厚度1</span>
+ctx.font = <span class="hljs-string">'36px arial'</span>;<span class="hljs-comment">//字体大小</span>
+ctx.strokeText(<span class="hljs-string">'Canvas text'</span>, <span class="hljs-number">50</span>, <span class="hljs-number">50</span>);<span class="hljs-comment">//描边。第一个参数文字，第二三个参数为坐标。</span>
+
+ctx.fillStyle = <span class="hljs-string">'red'</span>;<span class="hljs-comment">//填充颜色红色</span>
+ctx.font = <span class="hljs-string">'48px georgia'</span>;<span class="hljs-comment">//字体大小</span>
+ctx.fillText(<span class="hljs-string">'Canvas text'</span>, <span class="hljs-number">50</span>, <span class="hljs-number">150</span>);<span class="hljs-comment">//填充。第一个参数文字，第二三个参数为坐标。</span></code></pre>
+<h5 id="在画布上绘制图片"><a href="#在画布上绘制图片" class="headerlink" title="在画布上绘制图片"></a>在画布上绘制图片</h5><p><code>drawImage()</code>方法可将图片绘制在画布上。 </p>
+<p>首先：使用Image()构造器new一个image对象。</p>
+<p>其次：然后将它的 <code>src</code> 属性设置为 图片链接。 </p>
+<p>最后：<code>drawImage</code>方法嵌入图片。</p>
+<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> image = <span class="hljs-keyword">new</span> Image();
+image.src = <span class="hljs-string">'firefox.png'</span>;
+image.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+ 	ctx.drawImage(image, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>, <span class="hljs-number">185</span>, <span class="hljs-number">175</span>, <span class="hljs-number">50</span>, <span class="hljs-number">50</span>, <span class="hljs-number">185</span>, <span class="hljs-number">175</span>);
+&#125;</code></pre>
+<p><code>drawImage()</code>方法的几个参数：</p>
+<ul>
+<li>第一个：图片引用。（刚开始创建的一个图片对象）</li>
+<li>第二、三个：裁切部分左上顶点的坐标，参考原点为原图片本身左上角的坐标。原图片在该坐标左、上的部分均不会绘制出来。 </li>
+<li>第四、五个：裁切部分的长、宽 </li>
+<li>第六、七个：裁切部分左上顶点在画布中的位置坐标，参考原点为画布左上顶点 </li>
+<li>第八、九个：裁切部分在画布中绘制的长、宽 </li>
+</ul>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/js/">js</a>
+                    
+                      <a class="hover-with-bg" href="/tags/API/">API</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/02/24/js学习笔记-API（三）-1/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">js学习笔记-API（三/2）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2019/02/16/js学习笔记-API（二）/">
+                        <span class="hidden-mobile">js学习笔记-API（二）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script defer src="https://cdn.staticfile.org/valine/1.4.4/Valine.min.js" ></script>
+
+  <script type="text/javascript">
+    var oldLoadVa = window.onload;
+    window.onload = function () {
+      oldLoadVa && oldLoadVa();
+
+      new Valine({
+        el: "#vcomments",
+        app_id: "3RO7uNsUa0mDFJeViDvb9hiv-gzGzoHsz",
+        app_key: "vAOgCiCTzJqAcXPOCXMLwlSP",
+        placeholder: "_(:з」∠)_有什么话想要对我说吗？",
+        path: window.location.pathname,
+        avatar: "retro",
+        meta: ["nick","mail","link"],
+        pageSize: "10",
+        lang: "zh-CN",
+        highlight: false,
+        recordIP: false,
+        serverURLs: "",
+      });
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" rel="nofollow noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+  <a href="/" target="_blank" rel="nofollow noopener"> <b>方慕珩小可爱</b></a><br />
+  由 <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a> 强力驱动  
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>主题：Fluid</span></a>
+    
+
+    
+
+    
+    <br />
+  <span id="timeDate">载入天数...</span>
+  <span id="times">载入时分秒...</span>
+  <script>
+  var now = new Date();
+  function createtime(){
+      var grt= new Date("02/01/2019 00:00:00");//此处修改你的建站时间或者网站上线时间
+      now.setTime(now.getTime()+250);
+      days = (now - grt ) / 1000 / 60 / 60 / 24;
+      dnum = Math.floor(days);
+      hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+      hnum = Math.floor(hours);
+      if(String(hnum).length ==1 ){
+          hnum = "0" + hnum;
+      }
+      minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+      mnum = Math.floor(minutes);
+      if(String(mnum).length ==1 ){
+                mnum = "0" + mnum;
+      }
+      seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+      snum = Math.round(seconds);
+      if(String(snum).length ==1 ){
+                snum = "0" + snum;
+      }
+      document.getElementById("timeDate").innerHTML = "这颗小星球已经遨游了&nbsp"+dnum+"&nbsp天";
+      document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+  }
+  setInterval("createtime()",250);
+  </script>
+</div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "js学习笔记-API（三）&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+  
+  
+    <script>
+      !function (e, t, a) {
+        function r() {
+          for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
+          requestAnimationFrame(r)
+        }
+
+        function n() {
+          var t = "function" == typeof e.onclick && e.onclick;
+          e.onclick = function (e) {
+            t && t(), o(e)
+          }
+        }
+
+        function o(e) {
+          var a = t.createElement("div");
+          a.className = "heart", s.push({
+            el: a,
+            x: e.clientX - 5,
+            y: e.clientY - 5,
+            scale: 1,
+            alpha: 1,
+            color: c()
+          }), t.body.appendChild(a)
+        }
+
+        function i(e) {
+          var a = t.createElement("style");
+          a.type = "text/css";
+          try {
+            a.appendChild(t.createTextNode(e))
+          } catch (t) {
+            a.styleSheet.cssText = e
+          }
+          t.getElementsByTagName("head")[0].appendChild(a)
+        }
+
+        function c() {
+          return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+        }
+
+        var s = [];
+        e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {
+          setTimeout(e, 1e3 / 60)
+        }, i(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"), n(), r()
+      }(window, document);
+    </script>
+  
+
+
+
+  <script>(function (i, s, o, g, r, a, m) {
+      i['DaoVoiceObject'] = r;
+      i[r] = i[r] ||
+        function () {
+          (i[r].q = i[r].q || []).push(arguments);
+        };
+      i[r].l = 1 * new Date();
+      a = s.createElement(o);
+      m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      a.charset = 'utf-8';
+      m.parentNode.insertBefore(a, m);
+    })(window, document, 'script', ('https:' === document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/56fbfd12.js", 'daovoice');
+    daovoice('init', {
+      app_id: "56fbfd12",
+    });
+    daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
